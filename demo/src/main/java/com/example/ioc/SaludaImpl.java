@@ -1,9 +1,13 @@
 package com.example.ioc;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
+import lombok.NonNull;
 
 @Component("saludaEs")
 //@Qualifier("es")
@@ -18,13 +22,17 @@ public class SaludaImpl implements Saluda {
 	}
 
 	@Override
-	public void saluda(String nombre)
+	public void saluda(@NonNull String nombre)
 	{
-		entorno.write("Hola " + nombre);
+		entorno.write("Hola " + nombre.toUpperCase());
 	}
 
 	@Override
 	public int getContador() {
 		return entorno.getContador();
+	}
+	
+	public Optional<Entorno> getEntorno() {
+		return Optional.ofNullable(entorno);
 	}
 }

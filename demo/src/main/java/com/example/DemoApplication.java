@@ -37,6 +37,7 @@ public class DemoApplication implements CommandLineRunner{
 		System.err.println("Aplicación arrancada");
 		saluda.saluda("Mundo");
 		saluda2.saluda("Mundo");
+		saluda2.saluda(null);
 		System.out.println(saluda.getContador());
 		System.out.println(saluda2.getContador());
 		System.out.println(entorno.getContador());

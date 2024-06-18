@@ -7,6 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.example.ioc.Entorno;
+import com.example.ioc.Rango;
 import com.example.ioc.Saluda;
 import com.example.ioc.SaludaEnImpl2;
 
@@ -27,6 +28,9 @@ public class DemoApplication implements CommandLineRunner{
 	
 	@Autowired
 	Entorno entorno;
+	
+	@Autowired
+	private Rango rango;
 
 	@Override
 	public void run(String... args) throws Exception{
@@ -36,5 +40,6 @@ public class DemoApplication implements CommandLineRunner{
 		System.out.println(saluda.getContador());
 		System.out.println(saluda2.getContador());
 		System.out.println(entorno.getContador());
+		System.out.println(rango.getMin() + "-" + rango.getMax());
 	}
 }

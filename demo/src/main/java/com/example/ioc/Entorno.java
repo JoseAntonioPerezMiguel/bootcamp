@@ -4,4 +4,6 @@ public interface Entorno {
 
 	void write(String cad);
 
+	int getContador();
+
 }

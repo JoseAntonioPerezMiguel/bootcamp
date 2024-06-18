@@ -5,9 +5,8 @@ public class EntornoImpl implements Entorno {
 	
 	private int contador;
 	
-	public EntornoImpl(int contador) {
-		super();
-		this.contador = contador;
+	public EntornoImpl(int contInit) {
+		this.contador = contInit;
 	}
 
 	@Override
@@ -16,8 +15,7 @@ public class EntornoImpl implements Entorno {
 		System.out.println(cad);
 	}
 
-
-
+	@Override
 	public int getContador() {
 		return contador;
 	}	

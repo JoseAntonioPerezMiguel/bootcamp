@@ -37,8 +37,10 @@ class CalculadoraTest {
 			@Test
 			@DisplayName("Suma dos enteros")
 			void testAdd() {
-				var result = Calculadora.add(1, 2);
-				assertEquals(3, result);
+				assertEquals(3, Calculadora.add(1, 2));
+				assertEquals(3, Calculadora.add(4, -1), "caso 4,-1");
+				assertEquals(-2, Calculadora.add(-1, -1), "caso -1,-1");
+				assertEquals(0, Calculadora.add(0, 0), "caso 0,0");
 			}
 			
 			@Test

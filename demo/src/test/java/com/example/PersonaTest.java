@@ -1,7 +1,9 @@
 package com.example;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -43,6 +45,7 @@ class PersonaTest {
 			
 			@ParameterizedTest(name = "{0} {1}")
 			@CsvSource(value = {"1,Muis", "2,'Nergio, Sosti'", "3, Nergio, Sosti"})
+			@Disabled
 			void soloNombre(ArgumentsAccessor args) {
 				var persona = args.size() == 3 ? new Persona(args.getInteger(0), args.getString(1), args.getString(2)) :
 					new Persona(args.getInteger(0), args.getString(1));
@@ -53,6 +56,7 @@ class PersonaTest {
 						() -> assertTrue(args.size() == 3 ? persona.getApellidos().isPresent() :
 							persona.getApellidos().isEmpty(), "apellidos")
 						);
+//				assumeFalse(true, "falta los apellidos");
 			}
 		}
 

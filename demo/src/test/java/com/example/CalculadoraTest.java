@@ -10,7 +10,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-@DisplayName("Pruebas de la clase calculadora")
+@DisplayName("Pruebas de la clase Calculadora")
 class CalculadoraTest {
 
 	@BeforeAll

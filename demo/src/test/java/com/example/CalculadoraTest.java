@@ -8,7 +8,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 @DisplayName("Pruebas de la clase Calculadora")
 class CalculadoraTest {
@@ -36,11 +39,19 @@ class CalculadoraTest {
 		class OK {
 			@Test
 			@DisplayName("Suma dos enteros")
+			@RepeatedTest(value= 5, name = "{displayName} {currentRepetition}/{totalRepetitions}")
 			void testAdd() {
 				assertEquals(3, Calculadora.add(1, 2));
 				assertEquals(3, Calculadora.add(4, -1), "caso 4,-1");
 				assertEquals(-2, Calculadora.add(-1, -1), "caso -1,-1");
 				assertEquals(0, Calculadora.add(0, 0), "caso 0,0");
+			}
+			
+			@ParameterizedTest(name = "Caso {index}: {0} + {1} = {2}")
+			@DisplayName("Suma dos enteros")
+			@CsvSource(value = {"1,2,3", "3,-1,2", "-1,2,1", "-2,-3,-5", "0.1,0.2,0.3"})
+			void testAdd(double operando1, double operando2, double resultado) {
+				assertEquals(resultado, Calculadora.add(operando1, operando2));
 			}
 			
 			@Test

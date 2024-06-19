@@ -44,7 +44,7 @@ public class Persona {
 	}
 
 	private void setNombre(String nombre) {
-		if(nombre == null) throw new IllegalArgumentException("Falta el nombre");
+		if(nombre == null  || nombre.trim().length() == 0) throw new IllegalArgumentException("Falta el nombre");
 		this.nombre = nombre;
 	}
 

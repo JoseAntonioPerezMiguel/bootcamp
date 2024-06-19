@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
 import org.junit.jupiter.params.provider.CsvSource;
 
 @DisplayName("Pruebas de la clase Persona")
@@ -29,13 +30,26 @@ class PersonaTest {
 			}
 			
 			@ParameterizedTest(name = "{0} {1}")
-			@CsvSource(value = {"1,Muis", "2,'Nergio, Sosti'"})
+			@CsvSource(value = {"1,Muis", "2,'Nergio, Sosti'", "3, Nergio, Sosti"})
 			void soloNombre(int id, String nombre) {
 				var persona = new Persona(id, nombre);
 				assertNotNull(persona);
-				assertAll("Persona", 
+				assertAll("Persona",
 						() -> assertEquals(id, persona.getId(), "id"),
 						() -> assertEquals(nombre, persona.getNombre(), "nombre"),
+						() -> assertTrue(persona.getApellidos().isEmpty(), "apellidos")
+						);
+			}
+			
+			@ParameterizedTest(name = "{0} {1}")
+			@CsvSource(value = {"1,Muis", "2,'Nergio, Sosti'", "3, Nergio, Sosti"})
+			void soloNombre(ArgumentsAccessor args) {
+				var persona = args.size() == 3 ? new Persona(args.getInteger(0), args.getString(1), args.getString(2)) :
+					new Persona(args.getInteger(0), args.getString(1));
+				assertNotNull(persona);
+				assertAll("Persona",
+						() -> assertEquals(args.getInteger(0), persona.getId(), "id"),
+						() -> assertEquals(args.getString(1), persona.getNombre(), "nombre"),
 						() -> assertTrue(persona.getApellidos().isEmpty(), "apellidos")
 						);
 			}
@@ -43,10 +57,11 @@ class PersonaTest {
 
 		@Nested
 		class KO {
-//			@Test
-//			void test() {
-//				fail("Not yet implemented");
-//			}
+			@ParameterizedTest(name = "{0} {1}")
+			@CsvSource(value = {"3, ''", "5, '      '"})
+			void soloNombre(int id, String nombre) {
+				assertThrows(Exception.class, () -> new Persona(id, nombre));
+			}
 		}
 	}
 }

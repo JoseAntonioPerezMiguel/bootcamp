@@ -2,7 +2,7 @@ package com.example.ioc;
 
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Qualifier;
+//import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Scope;

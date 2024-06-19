@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.event.EventListener;
 
-import com.example.ioc.SaludaImpl.SaludaEvent;
+//import com.example.ioc.SaludaImpl.SaludaEvent;
 
 @Configuration
 public class MyConfig {

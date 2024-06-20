@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -59,7 +60,7 @@ class CalculadoraTest {
 			void testAdd2() {
 				var result = Calculadora.add(1, -0.9);
 				assertEquals(0.1, result);
-			}			
+			}
 		}
 		
 		@Nested
@@ -81,6 +82,7 @@ class CalculadoraTest {
 			}
 			
 			@Test
+			@Tag("smoke")
 			@DisplayName("Divide dos reales")
 			void testDivReal() {
 				var result = Calculadora.div(3.0, 2.0);

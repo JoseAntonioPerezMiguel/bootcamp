@@ -9,11 +9,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class GildedRoseTest {
 	
 	@ParameterizedTest(name = "Caso {index}: Item = {0}, SellIn = {1}, Quality = {2}")
-	@CsvSource(value = {"'Aged Brie', 3, 0, 1", "'Aged Brie', 0, 0, 2",
+	@CsvSource(value = {"'Aged Brie', 3, 0, 1",
+			"'Aged Brie', 0, 0, 2",
+			"'Aged Brie', 10, 54, 54",
 			"'Backstage passes to a TAFKAL80ETC concert', 10, 0, 2",
 			"'Backstage passes to a TAFKAL80ETC concert', 5, 0, 3",
 			"'Backstage passes to a TAFKAL80ETC concert', 0, 50, 0",
 			"'Backstage passes to a TAFKAL80ETC concert', 15, 24, 25",
+			"'Backstage passes to a TAFKAL80ETC concert', 24, 70, 70",
 			"'Sulfuras, Hand of Ragnaros', 3, 10, 10",
 			"'Backstage passes to a TAFKAL80ETC concert', 3, 50, 50",
 			"'Patata', 3, 0, 0",

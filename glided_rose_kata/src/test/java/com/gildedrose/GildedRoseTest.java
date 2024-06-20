@@ -6,14 +6,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GildedRoseTest {
 
-//    @Test
-//    void foo() {
-//        Item[] items = new Item[] { new Item("foo", 0, 0) };
-//        GildedRose app = new GildedRose(items);
-//        app.updateQuality();
-//        assertEquals("fixme", app.items[0].name);
-//    }
-
 	@Test
 	void givenAgedBrie_WhenUpdatingQuality_ThenQualityRises() {
 		Item[] items = new Item[] { new Item("Aged Brie", 3, 0) };
@@ -23,7 +15,7 @@ class GildedRoseTest {
 	}
 	
 	@Test
-	void givenAgedWithSellInZero_WhenUpdatingQuality_ThenQualityDoubleRises() {
+	void givenAgedBrieWithSellInZero_WhenUpdatingQuality_ThenQualityDoubleRises() {
 		Item[] items = new Item[] { new Item("Aged Brie", 0, 0) };
 		GildedRose app = new GildedRose(items);
 		app.updateQuality();
@@ -87,10 +79,18 @@ class GildedRoseTest {
 	}
 	
 	@Test
-	void givenItemWith3QualityAndSellin0_WhenUpdatingQuality_ThenQualityDecrementsDouble() {
-		Item[] items = new Item[] { new Item("Patata", 0, 3) };
+	void givenItemWith3QualityAndSellinNegative_WhenUpdatingQuality_ThenQualityDecrementsDouble() {
+		Item[] items = new Item[] { new Item("Patata", -1, 3) };
 		GildedRose app = new GildedRose(items);
 		app.updateQuality();
 		assertEquals(1, app.items[0].quality);
+	}
+	
+	@Test
+	void givenItemWith1QualityAndSellinNegative_WhenUpdatingQuality_ThenQualityDecrementsDouble() {
+		Item[] items = new Item[] { new Item("Patata", -1, 1) };
+		GildedRose app = new GildedRose(items);
+		app.updateQuality();
+		assertEquals(0, app.items[0].quality);
 	}
 }

@@ -1,10 +1,32 @@
 package com.gildedrose;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class GildedRoseTest {
+	
+	@ParameterizedTest(name = "Caso {index}: Item = {0}, SellIn = {1}, Quality = {2}")
+	@CsvSource(value = {"'Aged Brie', 3, 0, 1", "'Aged Brie', 0, 0, 2",
+			"'Backstage passes to a TAFKAL80ETC concert', 10, 0, 2",
+			"'Backstage passes to a TAFKAL80ETC concert', 5, 0, 3",
+			"'Backstage passes to a TAFKAL80ETC concert', 0, 50, 0",
+			"'Backstage passes to a TAFKAL80ETC concert', 15, 24, 25",
+			"'Sulfuras, Hand of Ragnaros', 3, 10, 10",
+			"'Backstage passes to a TAFKAL80ETC concert', 3, 50, 50",
+			"'Patata', 3, 0, 0",
+			"'Patata', 3, 3, 2",
+			"'Patata', -1, 3, 1",
+			"'Patata', -1, 1, 0"})
+	void test(String name, int sellIn, int quality, int expectedQuality) {
+		Item[] items = new Item[] { new Item(name, sellIn, quality) };
+		GildedRose app = new GildedRose(items);
+		app.updateQuality();
+		assertEquals(expectedQuality, app.items[0].quality);
+	}
+	
 
 	@Test
 	void givenAgedBrie_WhenUpdatingQuality_ThenQualityRises() {

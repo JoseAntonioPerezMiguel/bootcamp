@@ -71,6 +71,9 @@ class GildedRose {
 			case "Backstage passes to a TAFKAL80ETC concert":
 				updatePass(items[i]);
 				break;
+			case "Conjured Mana Cake":
+				updateConjured(items[i]);
+				break;
 			default:
 				updateDefault(items[i]);
 				break;
@@ -79,7 +82,18 @@ class GildedRose {
 
 	}
 
-	private Item updateBrie(Item item) {
+	private void updateConjured(Item item) {
+		if(item.quality > 0) {
+			if(item.sellIn >= 0) {
+				item.quality -= 2;
+			} else {
+				item.quality -= 4;
+			}
+		}
+		item.sellIn--;
+	}
+
+	private void updateBrie(Item item) {
 		if (item.quality < 50) {
 			if (item.sellIn > 0) {
 				item.quality++;
@@ -88,10 +102,9 @@ class GildedRose {
 			}
 		}
 		item.sellIn--;
-		return item;
 	}
 
-	private Item updatePass(Item item) {
+	private void updatePass(Item item) {
 		if (item.quality < 50) {
 			if (item.sellIn > 10) {
 				item.quality++;
@@ -104,10 +117,9 @@ class GildedRose {
 			item.quality = 0;
 		}
 		item.sellIn--;
-		return item;
 	}
 
-	private Item updateDefault(Item item) {
+	private void updateDefault(Item item) {
 		if (item.quality > 0) {
 			if (item.sellIn >= 0) {
 				item.quality--;
@@ -119,6 +131,5 @@ class GildedRose {
 
 		}
 		item.sellIn--;
-		return item;
 	}
 }

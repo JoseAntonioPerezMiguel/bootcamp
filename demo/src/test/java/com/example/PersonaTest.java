@@ -2,6 +2,10 @@ package com.example;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.*;
+
+import java.util.Optional;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -71,6 +75,16 @@ class PersonaTest {
 			void soloNombre(int id, String nombre) {
 				assertThrows(Exception.class, () -> new Persona(id, nombre));
 			}
+		}
+		
+		@Test
+		void setUpperCaseNameService() {
+			Persona person = new Persona(1, "Pepito", "Grillo");
+			var dao = mock(PersonaRepository.class);
+			when(dao.getOne(anyInt())).thenReturn(Optional.of(person));
+			var service = new PersonService(dao);
+			service.setUpperCaseName(1);
+			verify(dao).modify(person);
 		}
 	}
 }

@@ -13,6 +13,10 @@ public class Calculadora {
 		return redondea(a + b);
 	}
 	
+	public double add2(double a, double b) {
+		return redondea(a + b);
+	}
+	
 	public static double div(double a, double b) {
 		if(b == 0) throw new ArithmeticException();
 		return redondea(a / b);

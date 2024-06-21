@@ -1,6 +1,9 @@
 package com.example;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyDouble;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -11,13 +14,13 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.jupiter.api.MethodOrderer;
+//import org.junit.jupiter.api.TestMethodOrder;
+//import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 @DisplayName("Pruebas de la clase Calculadora")
-@TestMethodOrder(MethodOrderer.class)
+//@TestMethodOrder(MethodOrderer.class)
 class CalculadoraTest {
 
 	@BeforeAll
@@ -69,6 +72,14 @@ class CalculadoraTest {
 		@Nested
 		class KO {
 			
+		}
+		
+		@Test
+		void simula() {
+			Calculadora calculadora = mock(Calculadora.class);
+			when(calculadora.add2(anyDouble(), anyDouble())).thenReturn(3.0).thenReturn(4.0);
+			assertEquals(3, calculadora.add2(2.0, 2.0));
+			assertEquals(4, calculadora.add2(12.0, 24.0));
 		}
 	}
 	

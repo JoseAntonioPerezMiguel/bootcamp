@@ -43,7 +43,7 @@ public class Actor implements Serializable {
 	@Column(name = "last_update", insertable = false, updatable = false, nullable = false)
 	private Timestamp lastUpdate;
 
-	// bi-directional many-to-one association to FilmActor
+	// bi-directional many-to-one association to FilmActorº
 	@OneToMany(mappedBy = "actor")
 	private List<FilmActor> filmActors;
 

@@ -26,15 +26,15 @@ public class DemoApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception{
 		System.err.println("Aplicación arrancada");
-//		dao.findAll().forEach(System.out::println);
-		var item = dao.findById(201);
-		if(item.isEmpty()) {
-			System.err.println("No encontrado");
-		} else {
-			var actor = item.get();
-			actor.setFirstName(actor.getFirstName().toUpperCase());
-			dao.save(actor);
-		}
+//		var item = dao.findById(201);
+//		if(item.isEmpty()) {
+//			System.err.println("No encontrado");
+//		} else {
+//			var actor = item.get();
+//			actor.setFirstName(actor.getFirstName().toUpperCase());
+//			dao.save(actor);
+//		}
+		dao.deleteById(201);
 		dao.findAll().forEach(System.out::println);
 	}
 }

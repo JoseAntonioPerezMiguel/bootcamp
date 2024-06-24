@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.domain.Sort;
 
 import com.example.domains.contracts.repositories.ActorRepository;
 import com.example.domains.entities.Actor;
@@ -36,6 +37,11 @@ public class DemoApplication implements CommandLineRunner{
 //		}
 //		dao.deleteById(201);
 //		dao.findAll().forEach(System.out::println);
-		dao.findTop5ByLastNameStartingWithOrderByFirstNameDesc("P").forEach(System.out::println);
+//		dao.findTop5ByLastNameStartingWithOrderByFirstNameDesc("P").forEach(System.out::println);
+//		dao.findTop5ByLastNameStartingWith("P", Sort.by("LastName").ascending()).forEach(System.out::println);
+//		dao.findByActorIdGreaterThanEqual(198).forEach(System.out::println);
+//		dao.findByJPQL(198).forEach(System.out::println);
+//		dao.findBySQL(198).forEach(System.out::println);
+		dao.findAll((root, query, builder) -> builder.greaterThan(root.get("actorId"), 198)).forEach(System.out::println);
 	}
 }

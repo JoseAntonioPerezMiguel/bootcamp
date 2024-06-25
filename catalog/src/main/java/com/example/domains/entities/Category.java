@@ -12,39 +12,44 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
 /**
  * The persistent class for the category database table.
  * 
  */
 @Entity
-@Table(name="category")
-@NamedQuery(name="Category.findAll", query="SELECT c FROM Category c")
-public class Category extends EntityBase<Category>  implements Serializable {
+@Table(name = "category")
+@NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c")
+public class Category extends EntityBase<Category> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JsonProperty("id")
-	@Column(name="category_id", unique=true, nullable=false)
+	@Column(name = "category_id", unique = true, nullable = false)
 	private int categoryId;
 
-	@Column(name="last_update", insertable=false, updatable=false, nullable=false)
+	@Column(name = "last_update", insertable = false, updatable = false, nullable = false)
 	@JsonIgnore
 	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private Timestamp lastUpdate;
 
 	@JsonProperty("category")
 	@NotBlank
-	@Column(nullable=false, length=25)
+	@Column(nullable = false, length = 25)
 	private String name;
 
-	//bi-directional many-to-one association to FilmCategory
-	@OneToMany(mappedBy="category")
+	// bi-directional many-to-one association to FilmCategory
+	@OneToMany(mappedBy = "category")
 	@JsonIgnore
 	private List<FilmCategory> filmCategories;
 
 	public Category() {
+	}
+
+	public Category(int categoryId, @NotBlank String name) {
+		super();
+		this.categoryId = categoryId;
+		this.name = name;
 	}
 
 	public int getCategoryId() {

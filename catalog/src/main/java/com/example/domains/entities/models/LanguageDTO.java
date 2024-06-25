@@ -7,10 +7,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-public class FilmDTO implements Serializable {
+public class LanguageDTO implements Serializable {
 	@JsonProperty("id")
 	private int filmId;
 	
@@ -20,11 +21,11 @@ public class FilmDTO implements Serializable {
 	@JsonProperty("release_year")
 	private Short releaseYear;
 	
-	public static FilmDTO from(Film film) {
-		return new FilmDTO(film.getFilmId(), film.getTitle(), film.getReleaseYear());
+	public static LanguageDTO from(Film film) {
+		return new LanguageDTO(film.getFilmId(), film.getTitle(), film.getReleaseYear());
 	}
 	
-	public static Film from(FilmDTO filmDTO) {
+	public static Film from(LanguageDTO filmDTO) {
 		return new Film(filmDTO.getFilmId(), filmDTO.getReleaseYear(), filmDTO.getTitle());
 	}
 }

@@ -16,6 +16,8 @@ import com.example.domains.entities.Category;
 import com.example.domains.entities.Film;
 import com.example.domains.entities.Language;
 
+import jakarta.transaction.Transactional;
+
 @SpringBootApplication
 public class CatalogApplication implements CommandLineRunner{
 
@@ -36,6 +38,7 @@ public class CatalogApplication implements CommandLineRunner{
 	LanguageService languageSrv;
 	
 	@Override
+	@Transactional
 	public void run(String... args) throws Exception{
 		System.err.println("Aplicación arrancada");
 		filmSrv.getByProjection(PageRequest.of(0, 5, Sort.by("FilmId")), Film.class).forEach(System.out::println);

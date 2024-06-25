@@ -4,6 +4,7 @@ import java.io.Serializable;
 import jakarta.persistence.*;
 import java.sql.Timestamp;
 
+import com.example.domains.core.entities.EntityBase;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
@@ -14,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 @Table(name="film_actor")
 @NamedQuery(name="FilmActor.findAll", query="SELECT f FROM FilmActor f")
-public class FilmActor implements Serializable {
+public class FilmActor extends EntityBase<FilmActor> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId

@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class LanguageDTO implements Serializable {
 	@JsonProperty("id")
-	private int categoryId;
+	private int languageId;
 	
 	@JsonProperty("name")
 	private String name;
@@ -23,6 +23,6 @@ public class LanguageDTO implements Serializable {
 	}
 	
 	public static Category from(LanguageDTO categoryDTO) {
-		return new Category(categoryDTO.getCategoryId(), categoryDTO.getName());
+		return new Category(categoryDTO.getLanguageId(), categoryDTO.getName());
 	}
 }

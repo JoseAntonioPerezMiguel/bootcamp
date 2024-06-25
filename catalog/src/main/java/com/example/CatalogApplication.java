@@ -15,6 +15,10 @@ import com.example.domains.entities.Actor;
 import com.example.domains.entities.Category;
 import com.example.domains.entities.Film;
 import com.example.domains.entities.Language;
+import com.example.domains.entities.models.ActorDTO;
+import com.example.domains.entities.models.CategoryDTO;
+import com.example.domains.entities.models.FilmDTO;
+import com.example.domains.entities.models.LanguageDTO;
 
 import jakarta.transaction.Transactional;
 
@@ -41,9 +45,9 @@ public class CatalogApplication implements CommandLineRunner{
 	@Transactional
 	public void run(String... args) throws Exception{
 		System.err.println("Aplicación arrancada");
-		filmSrv.getByProjection(PageRequest.of(0, 5, Sort.by("FilmId")), Film.class).forEach(System.out::println);
-		actorSrv.getByProjection(PageRequest.of(0, 5, Sort.by("ActorId")), Actor.class).forEach(System.out::println);
-		categorySrv.getByProjection(PageRequest.of(0, 5, Sort.by("CategoryId")), Category.class).forEach(System.out::println);
-		languageSrv.getByProjection(PageRequest.of(0, 5, Sort.by("LanguageId")), Language.class).forEach(System.out::println);
+		filmSrv.getByProjection(PageRequest.of(0, 5, Sort.by("FilmId")), FilmDTO.class).forEach(System.out::println);
+		actorSrv.getByProjection(PageRequest.of(0, 5, Sort.by("ActorId")), ActorDTO.class).forEach(System.out::println);
+		categorySrv.getByProjection(PageRequest.of(0, 5, Sort.by("CategoryId")), CategoryDTO.class).forEach(System.out::println);
+		languageSrv.getByProjection(PageRequest.of(0, 5, Sort.by("LanguageId")), LanguageDTO.class).forEach(System.out::println);
 	}
 }

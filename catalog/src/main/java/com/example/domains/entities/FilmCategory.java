@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.sql.Timestamp;
 
 import com.example.domains.core.entities.EntityBase;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 /**
@@ -21,6 +22,7 @@ public class FilmCategory extends EntityBase<FilmCategory> implements Serializab
 	private FilmCategoryPK id;
 
 	@Column(name="last_update", insertable=false, updatable=false, nullable=false)
+	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private Timestamp lastUpdate;
 
 	//bi-directional many-to-one association to Category

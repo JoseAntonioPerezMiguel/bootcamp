@@ -2,10 +2,13 @@ package com.example.domains.entities;
 
 import java.io.Serializable;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+
 import java.sql.Timestamp;
 import java.util.List;
 
 import com.example.domains.core.entities.EntityBase;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 /**
@@ -24,9 +27,11 @@ public class Language extends EntityBase<Language> implements Serializable {
 	private int languageId;
 
 	@Column(name="last_update", insertable=false, updatable=false, nullable=false)
+	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private Timestamp lastUpdate;
 
 	@Column(nullable=false, length=20)
+	@NotBlank
 	private String name;
 
 	//bi-directional many-to-one association to Film

@@ -2,11 +2,16 @@ package com.example.domains.entities;
 
 import java.io.Serializable;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PositiveOrZero;
+
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 
 import com.example.domains.core.entities.EntityBase;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 /**
@@ -28,8 +33,10 @@ public class Film extends EntityBase<Film> implements Serializable {
 	private String description;
 
 	@Column(name="last_update", insertable=false, updatable=false, nullable=false)
+	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private Timestamp lastUpdate;
 
+	@PositiveOrZero(message = "La duración no puede ser negativa")
 	private int length;
 
 	@Column(length=1)
@@ -39,6 +46,7 @@ public class Film extends EntityBase<Film> implements Serializable {
 	private Short releaseYear;
 
 	@Column(name="rental_duration", nullable=false)
+	@PositiveOrZero(message = "La duracion no puede ser negativa")
 	private byte rentalDuration;
 
 	@Column(name="rental_rate", nullable=false, precision=10, scale=2)
@@ -48,6 +56,7 @@ public class Film extends EntityBase<Film> implements Serializable {
 	private BigDecimal replacementCost;
 
 	@Column(nullable=false, length=128)
+	@NotBlank
 	private String title;
 
 	//bi-directional many-to-one association to Language

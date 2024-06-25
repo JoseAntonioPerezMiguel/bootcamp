@@ -2,10 +2,13 @@ package com.example.domains.entities;
 
 import java.io.Serializable;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+
 import java.sql.Timestamp;
 import java.util.List;
 
 import com.example.domains.core.entities.EntityBase;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -28,9 +31,11 @@ public class Category extends EntityBase<Category>  implements Serializable {
 
 	@Column(name="last_update", insertable=false, updatable=false, nullable=false)
 	@JsonIgnore
+	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private Timestamp lastUpdate;
 
 	@JsonProperty("category")
+	@NotBlank
 	@Column(nullable=false, length=25)
 	private String name;
 

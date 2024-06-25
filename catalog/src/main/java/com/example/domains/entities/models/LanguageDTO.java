@@ -2,7 +2,7 @@ package com.example.domains.entities.models;
 
 import java.io.Serializable;
 
-import com.example.domains.entities.Film;
+import com.example.domains.entities.Category;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -13,19 +13,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class LanguageDTO implements Serializable {
 	@JsonProperty("id")
-	private int filmId;
+	private int categoryId;
 	
-	@JsonProperty("title")
-	private String title;
+	@JsonProperty("name")
+	private String name;
 	
-	@JsonProperty("release_year")
-	private Short releaseYear;
-	
-	public static LanguageDTO from(Film film) {
-		return new LanguageDTO(film.getFilmId(), film.getTitle(), film.getReleaseYear());
+	public static LanguageDTO from(Category category) {
+		return new LanguageDTO(category.getCategoryId(), category.getName());
 	}
 	
-	public static Film from(LanguageDTO filmDTO) {
-		return new Film(filmDTO.getFilmId(), filmDTO.getReleaseYear(), filmDTO.getTitle());
+	public static Category from(LanguageDTO categoryDTO) {
+		return new Category(categoryDTO.getCategoryId(), categoryDTO.getName());
 	}
 }

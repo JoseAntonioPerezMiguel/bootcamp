@@ -108,4 +108,8 @@ public class Language extends EntityBase<Language> implements Serializable {
 		return filmsVO;
 	}
 
+	@Override
+	public String toString() {
+		return "Language [languageId=" + languageId + ", lastUpdate=" + lastUpdate + ", name=" + name + "]";
+	}
 }

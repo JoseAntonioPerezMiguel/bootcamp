@@ -88,4 +88,9 @@ public class Category extends EntityBase<Category>  implements Serializable {
 		return filmCategory;
 	}
 
+	@Override
+	public String toString() {
+		return "Category [categoryId=" + categoryId + ", lastUpdate=" + lastUpdate + ", name=" + name
+				+ ", filmCategories=" + filmCategories + "]";
+	}
 }

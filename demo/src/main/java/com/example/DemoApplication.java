@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import com.example.domains.contracts.repositories.ActorRepository;
 import com.example.domains.entities.Actor;
 import com.example.domains.entities.models.ActorDTO;
+import com.example.domains.entities.models.ActorShort;
 import com.example.ioc.Entorno;
 import com.example.ioc.Rango;
 import com.example.ioc.Saluda;
@@ -67,6 +68,8 @@ public class DemoApplication implements CommandLineRunner {
 		dao.readByActorIdGreaterThanEqual(200).forEach(System.out::println);
 		dao.queryByActorIdGreaterThanEqual(200).forEach(System.out::println);
 		dao.queryByActorIdGreaterThanEqual(200).forEach(item -> System.out.println(item.getId() + " " + item.getNombre()));
+		dao.findByActorIdGreaterThanEqual(200, ActorDTO.class).forEach(System.out::println);
+		dao.findByActorIdGreaterThanEqual(200, ActorShort.class).forEach(item -> System.out.println(item.getId() + " " + item.getNombre()));
 		
 	}
 }

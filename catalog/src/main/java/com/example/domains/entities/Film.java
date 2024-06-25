@@ -210,4 +210,14 @@ public class Film extends EntityBase<Film> implements Serializable {
 
 		return filmCategory;
 	}
+
+	@Override
+	public String toString() {
+		return "Film [filmId=" + filmId + ", lastUpdate=" + lastUpdate + ", length="
+				+ length + ", rating=" + rating + ", releaseYear=" + releaseYear + ", rentalDuration=" + rentalDuration
+				+ ", rentalRate=" + rentalRate + ", replacementCost=" + replacementCost + ", title=" + title
+				+ ", language=" + language + ", languageVO=" + languageVO + "]";
+	}
+	
+	
 }

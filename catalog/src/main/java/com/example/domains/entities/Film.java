@@ -5,7 +5,9 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
-import java.lang.Short;
+
+import com.example.domains.core.entities.EntityBase;
+
 
 /**
  * The persistent class for the film database table.
@@ -14,7 +16,7 @@ import java.lang.Short;
 @Entity
 @Table(name="film")
 @NamedQuery(name="Film.findAll", query="SELECT f FROM Film f")
-public class Film implements Serializable {
+public class Film extends EntityBase<Film> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -65,10 +67,6 @@ public class Film implements Serializable {
 	//bi-directional many-to-one association to FilmCategory
 	@OneToMany(mappedBy="film", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<FilmCategory> filmCategories;
-
-	//bi-directional many-to-one association to Inventory
-	@OneToMany(mappedBy="film")
-	private List<Inventory> inventories;
 
 	public Film() {
 	}
@@ -212,27 +210,4 @@ public class Film implements Serializable {
 
 		return filmCategory;
 	}
-
-	public List<Inventory> getInventories() {
-		return this.inventories;
-	}
-
-	public void setInventories(List<Inventory> inventories) {
-		this.inventories = inventories;
-	}
-
-	public Inventory addInventory(Inventory inventory) {
-		getInventories().add(inventory);
-		inventory.setFilm(this);
-
-		return inventory;
-	}
-
-	public Inventory removeInventory(Inventory inventory) {
-		getInventories().remove(inventory);
-		inventory.setFilm(null);
-
-		return inventory;
-	}
-
 }

@@ -23,31 +23,33 @@ import com.example.domains.entities.models.LanguageDTO;
 import jakarta.transaction.Transactional;
 
 @SpringBootApplication
-public class CatalogApplication implements CommandLineRunner{
+public class CatalogApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CatalogApplication.class, args);
 	}
-	
+
 	@Autowired
 	FilmService filmSrv;
-	
+
 	@Autowired
 	ActorService actorSrv;
-	
+
 	@Autowired
 	CategoryService categorySrv;
-	
+
 	@Autowired
 	LanguageService languageSrv;
-	
+
 	@Override
 	@Transactional
-	public void run(String... args) throws Exception{
+	public void run(String... args) throws Exception {
 		System.err.println("Aplicación arrancada");
 		filmSrv.getByProjection(PageRequest.of(0, 5, Sort.by("FilmId")), FilmDTO.class).forEach(System.out::println);
 		actorSrv.getByProjection(PageRequest.of(0, 5, Sort.by("ActorId")), ActorDTO.class).forEach(System.out::println);
-		categorySrv.getByProjection(PageRequest.of(0, 5, Sort.by("CategoryId")), CategoryDTO.class).forEach(System.out::println);
-		languageSrv.getByProjection(PageRequest.of(0, 5, Sort.by("LanguageId")), LanguageDTO.class).forEach(System.out::println);
+		categorySrv.getByProjection(PageRequest.of(0, 5, Sort.by("CategoryId")), CategoryDTO.class)
+				.forEach(System.out::println);
+		languageSrv.getByProjection(PageRequest.of(0, 5, Sort.by("LanguageId")), LanguageDTO.class)
+				.forEach(System.out::println);
 	}
 }

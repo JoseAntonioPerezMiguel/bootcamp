@@ -45,7 +45,7 @@ public class CatalogApplication implements CommandLineRunner {
 	@Transactional
 	public void run(String... args) throws Exception {
 		System.err.println("Aplicación arrancada");
-		filmSrv.getByProjection(PageRequest.of(0, 3, Sort.by("FilmId")), Film.class)
+		filmSrv.getByProjection(PageRequest.of(0, 1, Sort.by("FilmId")), Film.class)
 			.stream()
 			.map(f -> new FilmDTO(f.getFilmId(), f.getTitle(), f.getReleaseYear(), f.getFilmCategories().stream()
 						.map(fc -> fc.getCategory().getName()).toList(), 
@@ -54,10 +54,11 @@ public class CatalogApplication implements CommandLineRunner {
 			.forEach(System.out::println);
 		
 		Film film = filmSrv.getOne(1).get();
-		film.addActor(actorSrv.getOne(24).get());
+//		film.addActor(actorSrv.getOne(26).get());
+		film.addCategory(categorySrv.getOne(2).get());
 		filmSrv.modify(film);
 		
-		filmSrv.getByProjection(PageRequest.of(0, 3, Sort.by("FilmId")), Film.class)
+		filmSrv.getByProjection(PageRequest.of(0, 1, Sort.by("FilmId")), Film.class)
 		.stream()
 		.map(f -> new FilmDTO(f.getFilmId(), f.getTitle(), f.getReleaseYear(), f.getFilmCategories().stream()
 					.map(fc -> fc.getCategory().getName()).toList(), 

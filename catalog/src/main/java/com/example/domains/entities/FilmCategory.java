@@ -2,6 +2,8 @@ package com.example.domains.entities;
 
 import java.io.Serializable;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+
 import java.sql.Timestamp;
 
 import com.example.domains.core.entities.EntityBase;
@@ -68,6 +70,13 @@ public class FilmCategory extends EntityBase<FilmCategory> implements Serializab
 
 	public void setFilm(Film film) {
 		this.film = film;
+	}
+
+	@PrePersist
+	public void checkId() {
+		if (getId() == null) {
+			setId(new FilmCategoryPK(getFilm().getFilmId(), getCategory().getCategoryId()));
+		}
 	}
 
 }

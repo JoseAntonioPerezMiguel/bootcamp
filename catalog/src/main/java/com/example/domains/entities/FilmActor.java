@@ -73,7 +73,7 @@ public class FilmActor extends EntityBase<FilmActor> implements Serializable {
 	}
 
 	@PrePersist
-	public void checkFilmActorId() {
+	public void checkId() {
 		if (getId() == null) {
 			setId(new FilmActorPK(getActor().getActorId(), getFilm().getFilmId()));
 		}

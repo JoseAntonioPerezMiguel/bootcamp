@@ -194,7 +194,7 @@ public class Film extends EntityBase<Film> implements Serializable {
 	public FilmActor addFilmActor(FilmActor filmActor) {
 		getFilmActors().add(filmActor);
 		filmActor.setFilm(this);
-		filmActor.checkFilmActorId();
+		filmActor.checkId();
 
 		return filmActor;
 	}
@@ -217,6 +217,7 @@ public class Film extends EntityBase<Film> implements Serializable {
 	public FilmCategory addFilmCategory(FilmCategory filmCategory) {
 		getFilmCategories().add(filmCategory);
 		filmCategory.setFilm(this);
+		filmCategory.checkId();
 
 		return filmCategory;
 	}
@@ -233,6 +234,13 @@ public class Film extends EntityBase<Film> implements Serializable {
 		fa.setActor(actor);
 		fa.setFilm(this);
 		addFilmActor(fa);
+	}
+	
+	public void addCategory(Category category) {
+		FilmCategory fc = new FilmCategory();
+		fc.setCategory(category);
+		fc.setFilm(this);
+		addFilmCategory(fc);
 	}
 
 	@Override

@@ -23,6 +23,8 @@ public class FilmDTO implements Serializable {
 	
 	private List<String> categories;
 	
+	private List<String> actors;
+	
 	public static FilmDTO from(Film film) {
 		return new FilmDTO(film.getFilmId(), film.getTitle(), film.getReleaseYear());
 	}

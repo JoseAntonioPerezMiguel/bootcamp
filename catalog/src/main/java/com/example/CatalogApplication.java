@@ -43,11 +43,12 @@ public class CatalogApplication implements CommandLineRunner {
 	@Transactional
 	public void run(String... args) throws Exception {
 		System.err.println("Aplicación arrancada");
-		filmSrv.getByProjection(PageRequest.of(0, 100, Sort.by("FilmId")), Film.class)
+		filmSrv.getByProjection(PageRequest.of(0, 3, Sort.by("FilmId")), Film.class)
 			.stream()
-			.map(f -> new FilmDTO(f.getFilmId(), f.getTitle(), f.getReleaseYear(), f.getFilmCategories()
-					.stream()
-					.map(fc -> fc.getCategory().getName()).toList()))
+			.map(f -> new FilmDTO(f.getFilmId(), f.getTitle(), f.getReleaseYear(), f.getFilmCategories().stream()
+						.map(fc -> fc.getCategory().getName()).toList(), 
+					f.getFilmActors().stream()
+						.map(fa -> fa.getActor().getFirstName() + " " + fa.getActor().getLastName()).toList()))
 			.forEach(System.out::println);
 		
 		actorSrv.getByProjection(PageRequest.of(0, 5, Sort.by("ActorId")), ActorDTO.class).forEach(System.out::println);

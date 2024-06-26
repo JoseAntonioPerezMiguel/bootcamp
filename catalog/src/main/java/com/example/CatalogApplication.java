@@ -66,6 +66,17 @@ public class CatalogApplication implements CommandLineRunner {
 					.map(fa -> fa.getActor().getFirstName() + " " + fa.getActor().getLastName()).toList()))
 		.forEach(System.out::println);
 		
+		film.removeCategory(2);
+		filmSrv.modify(film);
+		
+		filmSrv.getByProjection(PageRequest.of(0, 1, Sort.by("FilmId")), Film.class)
+		.stream()
+		.map(f -> new FilmDTO(f.getFilmId(), f.getTitle(), f.getReleaseYear(), f.getFilmCategories().stream()
+					.map(fc -> fc.getCategory().getName()).toList(), 
+				f.getFilmActors().stream()
+					.map(fa -> fa.getActor().getFirstName() + " " + fa.getActor().getLastName()).toList()))
+		.forEach(System.out::println);
+		
 		actorSrv.getByProjection(PageRequest.of(0, 5, Sort.by("ActorId")), ActorDTO.class).forEach(System.out::println);
 		categorySrv.getByProjection(PageRequest.of(0, 5, Sort.by("CategoryId")), CategoryDTO.class)
 				.forEach(System.out::println);

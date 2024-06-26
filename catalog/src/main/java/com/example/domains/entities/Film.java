@@ -229,6 +229,13 @@ public class Film extends EntityBase<Film> implements Serializable {
 		return filmCategory;
 	}
 	
+	public void removeCategory(int categoryId) {
+		var fc = getFilmCategories().stream().filter(it -> it.getCategory().getCategoryId() == categoryId).findFirst();
+		if(!fc.isEmpty()) {
+			removeFilmCategory(fc.get());
+		}
+	}
+	
 	public void addActor(Actor actor) {
 		FilmActor fa = new FilmActor();
 		fa.setActor(actor);

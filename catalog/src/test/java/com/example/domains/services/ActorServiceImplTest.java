@@ -1,6 +1,10 @@
 package com.example.domains.services;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
@@ -22,6 +26,7 @@ import com.example.domains.contracts.repositories.ActorRepository;
 import com.example.domains.entities.Actor;
 import com.example.exceptions.DuplicateKeyException;
 import com.example.exceptions.InvalidDataException;
+import com.example.exceptions.NotFoundException;
 
 class ActorServiceImplTest {
 
@@ -97,7 +102,36 @@ class ActorServiceImplTest {
 		}
 	}
 	
+	@Test
+    void testModify() throws NotFoundException, InvalidDataException {
+        Actor actor = new Actor(1, "NOMBRE", "Apellido");
+        Actor modActor = new Actor(1, "JUAN", "Apellido");
+        when(dao.existsById(1)).thenReturn(true);
+        when(dao.save(actor)).thenReturn(actor);
+
+        Actor result = service.modify(modActor);
+        assertEquals(modActor, result);
+    }
 	
+	@Test
+    void testDelete() throws InvalidDataException {
+        Actor actor = new Actor(1, "NOMBRE", "Apellido");
+
+        service.delete(actor);
+        service.delete(actor);
+
+        verify(dao, times(2)).delete(actor);
+    }
+	
+	@Test
+	void testDeleteById() {
+		doNothing().when(dao).deleteById(anyInt());
+		
+        service.deleteById(1);
+        service.deleteById(2);
+
+        verify(dao, times(2)).deleteById(anyInt());
+    }
 
 	private static Stream<Arguments> actorProvider() {
 		return Stream.of(Arguments.of(null, InvalidDataException.class),

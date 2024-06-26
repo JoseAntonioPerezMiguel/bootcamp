@@ -1,6 +1,7 @@
 package com.example.domains.entities.models;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.example.domains.entities.Film;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -20,6 +21,8 @@ public class FilmDTO implements Serializable {
 	@JsonProperty("release_year")
 	private Short releaseYear;
 	
+	private List<String> categories;
+	
 	public static FilmDTO from(Film film) {
 		return new FilmDTO(film.getFilmId(), film.getTitle(), film.getReleaseYear());
 	}
@@ -27,4 +30,10 @@ public class FilmDTO implements Serializable {
 	public static Film from(FilmDTO filmDTO) {
 		return new Film(filmDTO.getFilmId(), filmDTO.getReleaseYear(), filmDTO.getTitle());
 	}
+
+	public FilmDTO(int filmId, String title, Short releaseYear) {
+		this.filmId = filmId;
+		this.title = title;
+		this.releaseYear = releaseYear;
+	}	
 }

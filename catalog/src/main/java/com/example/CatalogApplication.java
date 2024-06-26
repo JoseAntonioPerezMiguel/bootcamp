@@ -1,5 +1,6 @@
 package com.example;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -11,10 +12,7 @@ import com.example.core.contracts.services.ActorService;
 import com.example.core.contracts.services.CategoryService;
 import com.example.core.contracts.services.FilmService;
 import com.example.core.contracts.services.LanguageService;
-import com.example.domains.entities.Actor;
-import com.example.domains.entities.Category;
 import com.example.domains.entities.Film;
-import com.example.domains.entities.Language;
 import com.example.domains.entities.models.ActorDTO;
 import com.example.domains.entities.models.CategoryDTO;
 import com.example.domains.entities.models.FilmDTO;
@@ -45,7 +43,13 @@ public class CatalogApplication implements CommandLineRunner {
 	@Transactional
 	public void run(String... args) throws Exception {
 		System.err.println("Aplicación arrancada");
-		filmSrv.getByProjection(PageRequest.of(0, 5, Sort.by("FilmId")), FilmDTO.class).forEach(System.out::println);
+		filmSrv.getByProjection(PageRequest.of(0, 100, Sort.by("FilmId")), Film.class)
+			.stream()
+			.map(f -> new FilmDTO(f.getFilmId(), f.getTitle(), f.getReleaseYear(), f.getFilmCategories()
+					.stream()
+					.map(fc -> fc.getCategory().getName()).toList()))
+			.forEach(System.out::println);
+		
 		actorSrv.getByProjection(PageRequest.of(0, 5, Sort.by("ActorId")), ActorDTO.class).forEach(System.out::println);
 		categorySrv.getByProjection(PageRequest.of(0, 5, Sort.by("CategoryId")), CategoryDTO.class)
 				.forEach(System.out::println);

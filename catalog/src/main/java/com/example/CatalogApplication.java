@@ -54,7 +54,7 @@ public class CatalogApplication implements CommandLineRunner {
 			.forEach(System.out::println);
 		
 		Film film = filmSrv.getOne(1).get();
-//		film.addActor(actorSrv.getOne(26).get());
+		film.addActor(actorSrv.getOne(26).get());
 		film.addCategory(categorySrv.getOne(2).get());
 		filmSrv.modify(film);
 		
@@ -67,6 +67,7 @@ public class CatalogApplication implements CommandLineRunner {
 		.forEach(System.out::println);
 		
 		film.removeCategory(2);
+		film.removeActor(26);
 		filmSrv.modify(film);
 		
 		filmSrv.getByProjection(PageRequest.of(0, 1, Sort.by("FilmId")), Film.class)

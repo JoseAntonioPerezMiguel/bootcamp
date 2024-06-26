@@ -2,7 +2,6 @@ package com.example.domains.entities;
 
 import java.io.Serializable;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 
 import java.sql.Timestamp;
 

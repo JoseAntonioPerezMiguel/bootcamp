@@ -10,12 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.boot.test.mock.mockito.MockBean;
-
-import com.example.core.contracts.services.ActorService;
-import com.example.core.contracts.services.CategoryService;
-import com.example.core.contracts.services.FilmService;
-import com.example.core.contracts.services.LanguageService;
 import com.example.domains.entities.Actor;
 
 @DataJpaTest

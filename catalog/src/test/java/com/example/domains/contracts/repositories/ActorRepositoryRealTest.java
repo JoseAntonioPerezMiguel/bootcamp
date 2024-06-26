@@ -1,23 +1,9 @@
 package com.example.domains.contracts.repositories;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.sql.Timestamp;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-
-import com.example.core.contracts.services.ActorService;
-import com.example.core.contracts.services.CategoryService;
-import com.example.core.contracts.services.FilmService;
-import com.example.core.contracts.services.LanguageService;
-import com.example.domains.entities.Actor;
 
 @SpringBootTest
 class ActorRepositoryRealTest {

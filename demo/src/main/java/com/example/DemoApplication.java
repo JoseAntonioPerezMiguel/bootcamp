@@ -1,27 +1,13 @@
 package com.example;
 
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 
 import com.example.core.contracts.services.ActorService;
 import com.example.domains.contracts.repositories.ActorRepository;
-import com.example.domains.entities.Actor;
 import com.example.domains.entities.models.ActorDTO;
-import com.example.domains.entities.models.ActorShort;
-import com.example.ioc.Entorno;
-import com.example.ioc.Rango;
-import com.example.ioc.Saluda;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import jakarta.transaction.Transactional;
-//import com.example.ioc.SaludaEnImpl2;
 
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner {

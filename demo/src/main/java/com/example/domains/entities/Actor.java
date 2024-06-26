@@ -13,7 +13,6 @@ import java.util.Objects;
 import com.example.domains.core.entities.EntityBase;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * The persistent class for the actor database table.

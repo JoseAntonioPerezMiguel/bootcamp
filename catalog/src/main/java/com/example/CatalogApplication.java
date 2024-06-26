@@ -1,26 +1,7 @@
 package com.example;
 
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-
-import com.example.core.contracts.services.ActorService;
-import com.example.core.contracts.services.CategoryService;
-import com.example.core.contracts.services.FilmService;
-import com.example.core.contracts.services.LanguageService;
-import com.example.domains.entities.Actor;
-import com.example.domains.entities.Film;
-import com.example.domains.entities.FilmActor;
-import com.example.domains.entities.models.ActorDTO;
-import com.example.domains.entities.models.CategoryDTO;
-import com.example.domains.entities.models.FilmDTO;
-import com.example.domains.entities.models.LanguageDTO;
-
-import jakarta.transaction.Transactional;
 
 @SpringBootApplication
 public class CatalogApplication {

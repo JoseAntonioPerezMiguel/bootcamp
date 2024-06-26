@@ -23,12 +23,12 @@ import com.example.domains.entities.models.LanguageDTO;
 import jakarta.transaction.Transactional;
 
 @SpringBootApplication
-public class CatalogApplication implements CommandLineRunner {
+public class CatalogApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CatalogApplication.class, args);
 	}
-
+/*
 	@Autowired
 	FilmService filmSrv;
 
@@ -83,5 +83,5 @@ public class CatalogApplication implements CommandLineRunner {
 				.forEach(System.out::println);
 		languageSrv.getByProjection(PageRequest.of(0, 5, Sort.by("LanguageId")), LanguageDTO.class)
 				.forEach(System.out::println);
-	}
+	}*/
 }

@@ -12,7 +12,9 @@ import com.example.core.contracts.services.ActorService;
 import com.example.core.contracts.services.CategoryService;
 import com.example.core.contracts.services.FilmService;
 import com.example.core.contracts.services.LanguageService;
+import com.example.domains.entities.Actor;
 import com.example.domains.entities.Film;
+import com.example.domains.entities.FilmActor;
 import com.example.domains.entities.models.ActorDTO;
 import com.example.domains.entities.models.CategoryDTO;
 import com.example.domains.entities.models.FilmDTO;
@@ -50,6 +52,18 @@ public class CatalogApplication implements CommandLineRunner {
 					f.getFilmActors().stream()
 						.map(fa -> fa.getActor().getFirstName() + " " + fa.getActor().getLastName()).toList()))
 			.forEach(System.out::println);
+		
+		Film film = filmSrv.getOne(1).get();
+		film.addActor(actorSrv.getOne(24).get());
+		filmSrv.modify(film);
+		
+		filmSrv.getByProjection(PageRequest.of(0, 3, Sort.by("FilmId")), Film.class)
+		.stream()
+		.map(f -> new FilmDTO(f.getFilmId(), f.getTitle(), f.getReleaseYear(), f.getFilmCategories().stream()
+					.map(fc -> fc.getCategory().getName()).toList(), 
+				f.getFilmActors().stream()
+					.map(fa -> fa.getActor().getFirstName() + " " + fa.getActor().getLastName()).toList()))
+		.forEach(System.out::println);
 		
 		actorSrv.getByProjection(PageRequest.of(0, 5, Sort.by("ActorId")), ActorDTO.class).forEach(System.out::println);
 		categorySrv.getByProjection(PageRequest.of(0, 5, Sort.by("CategoryId")), CategoryDTO.class)

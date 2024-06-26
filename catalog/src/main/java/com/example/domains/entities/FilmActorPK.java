@@ -2,12 +2,14 @@ package com.example.domains.entities;
 
 import java.io.Serializable;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 
 /**
  * The primary key class for the film_actor database table.
  * 
  */
 @Embeddable
+@AllArgsConstructor
 public class FilmActorPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;

@@ -35,6 +35,11 @@ public class Actor extends EntityBase<Actor> implements Serializable {
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
+	
+	public Actor(String firstName, String lastName) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
 
 	private static final long serialVersionUID = 1L;
 

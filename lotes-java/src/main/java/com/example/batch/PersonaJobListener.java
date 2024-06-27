@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 import com.example.models.Persona;
 
-
 @Component
 public class PersonaJobListener implements JobExecutionListener {
 	private static final Logger log = LoggerFactory.getLogger(PersonaJobListener.class);

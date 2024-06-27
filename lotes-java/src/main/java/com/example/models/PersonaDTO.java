@@ -9,5 +9,5 @@ public class PersonaDTO {
 	private String surname;
 	private String email;
 	private String gender;
-	private String ip;	
+	private String ip;
 }

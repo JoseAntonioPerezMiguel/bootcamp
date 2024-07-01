@@ -24,7 +24,7 @@ public class CalculatorProxyImpl extends WebServiceGatewaySupport implements Cal
 		request.setOp2(b);
 		var response = (AddResponse) getWebServiceTemplate().marshalSendAndReceive(request,
 				new SoapActionCallback("http://example.com/webservices/schemas/calculator"));
-		return response.getAddResult();
+		return round(response.getAddResult());
 	}
 
 	public double subtract(double a, double b) {
@@ -33,7 +33,7 @@ public class CalculatorProxyImpl extends WebServiceGatewaySupport implements Cal
 		request.setOp2(b);
 		var response = (SubtractResponse) getWebServiceTemplate().marshalSendAndReceive(request,
 				new SoapActionCallback("http://example.com/webservices/schemas/calculator"));
-		return response.getSubtractResult();
+		return round(response.getSubtractResult());
 	}
 	
 	public double multiply(double a, double b) {
@@ -42,7 +42,7 @@ public class CalculatorProxyImpl extends WebServiceGatewaySupport implements Cal
 		request.setOp2(b);
 		var response = (MultiplyResponse) getWebServiceTemplate().marshalSendAndReceive(request,
 				new SoapActionCallback("http://example.com/webservices/schemas/calculator"));
-		return response.getMultiplyResult();
+		return round(response.getMultiplyResult());
 	}
 	
 	private double round(double value) {

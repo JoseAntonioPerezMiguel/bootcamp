@@ -1,5 +1,6 @@
 package com.example.application.proxies;
 
+import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;

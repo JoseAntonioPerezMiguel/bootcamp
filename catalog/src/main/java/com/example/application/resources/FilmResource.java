@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.example.application.resources.ActorResource.Peli;
 import com.example.core.contracts.services.FilmService;
+import com.example.domains.entities.Film;
 import com.example.domains.entities.models.FilmDTO;
 import com.example.domains.entities.models.FilmShort;
 import com.example.exceptions.BadRequestException;
@@ -28,6 +30,7 @@ import com.example.exceptions.DuplicateKeyException;
 import com.example.exceptions.InvalidDataException;
 import com.example.exceptions.NotFoundException;
 
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
@@ -75,9 +78,23 @@ public class FilmResource {
 		var items = srv.getFilmsByLanguage(id);
 		return items.stream().map(f -> FilmDTO.from(f)).toList();
 	}
+	
+	record Actor(int id, String firstName, String lastName) {
+		
+	}
+	@GetMapping(path = "/{id}/actors")
+	@Transactional
+	public List<Actor> getActors(@PathVariable int id) throws NotFoundException {
+		var item = srv.getOne(id);
+		if (item.isEmpty()) {
+			throw new NotFoundException();
+		}
+		return item.get().getFilmActors().stream()
+				.map(fa -> new Actor(fa.getActor().getActorId(), fa.getActor().getFirstName(), fa.getActor().getLastName())).toList();
+	}
 
 	@PostMapping
-	public ResponseEntity<Object> create(@Valid @RequestBody FilmDTO item)
+	public ResponseEntity<Object> create(@Valid @RequestBody Film item)
 			throws BadRequestException, DuplicateKeyException, InvalidDataException {
 		var newItem = srv.add(FilmDTO.from(item));
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")

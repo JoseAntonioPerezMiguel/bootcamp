@@ -8,4 +8,6 @@ import com.example.domains.entities.Film;
 public interface FilmService extends ProjectionDomainService<Film, Integer> {
 
 	List<Film> getFilmsByCategory(int id);
+
+	List<Film> getFilmsByLanguage(int id);
 }

@@ -58,6 +58,11 @@ public class FilmServiceImpl implements FilmService {
 	public List<Film> getFilmsByCategory(int id) {
 		return dao.findByCategory(id);
 	}
+	
+	@Override
+	public List<Film> getFilmsByLanguage(int id) {
+		return dao.findByLanguage(id);
+	}
 
 	@Override
 	public Optional<Film> getOne(Integer id) {

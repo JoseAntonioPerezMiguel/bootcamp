@@ -27,9 +27,7 @@ import com.example.exceptions.BadRequestException;
 import com.example.exceptions.DuplicateKeyException;
 import com.example.exceptions.InvalidDataException;
 import com.example.exceptions.NotFoundException;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
@@ -51,67 +49,43 @@ public class FilmResource {
 			return srv.getByProjection(FilmDTO.class);
 		}
 	}
-/*
+
 	@GetMapping(params = "page")
 	public Page<FilmShort> getAll(Pageable page) {
 		return srv.getByProjection(page, FilmShort.class);
 	}
 
 	@GetMapping(path = "/{id}")
-	public ActorDTO getById(@PathVariable int id) throws NotFoundException {
+	public FilmDTO getById(@PathVariable int id) throws NotFoundException {
 		var item = srv.getOne(id);
 		if (item.isEmpty()) {
 			throw new NotFoundException();
 		}
-		return ActorDTO.from(item.get());
-	}
-	
-	record Peli(int id, String title) {
-		
-	}
-	@GetMapping(path = "/{id}/films")
-	@Transactional
-	public List<Peli> getFilms(@PathVariable int id) throws NotFoundException {
-		var item = srv.getOne(id);
-		if (item.isEmpty()) {
-			throw new NotFoundException();
-		}
-		return item.get().getFilmActors().stream()
-				.map(fa -> new Peli(fa.getFilm().getFilmId(), fa.getFilm().getTitle())).toList();
-	}
-	
-	@PutMapping(path = "/{id}/retirement")
-	@ResponseStatus(HttpStatus.ACCEPTED)
-	public void retireActor(@PathVariable int id) throws NotFoundException {
-		var item = srv.getOne(id);
-		if (item.isEmpty()) {
-			throw new NotFoundException();
-		}
-		item.get().retirement();
+		return FilmDTO.from(item.get());
 	}
 
 	@PostMapping
-	public ResponseEntity<Object> create(@Valid @RequestBody ActorDTO item)
+	public ResponseEntity<Object> create(@Valid @RequestBody FilmDTO item)
 			throws BadRequestException, DuplicateKeyException, InvalidDataException {
-		var newItem = srv.add(ActorDTO.from(item));
+		var newItem = srv.add(FilmDTO.from(item));
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(newItem.getActorId()).toUri();
+				.buildAndExpand(newItem.getFilmId()).toUri();
 		return ResponseEntity.created(location).build();
 	}
 
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void update(@PathVariable int id, @Valid @RequestBody ActorDTO item)
+	public void update(@PathVariable int id, @Valid @RequestBody FilmDTO item)
 			throws BadRequestException, NotFoundException, InvalidDataException {
-		if (id != item.getActorId()) {
+		if (id != item.getFilmId()) {
 			throw new BadRequestException("No coinciden los identificadores.");
 		}
-		srv.modify(ActorDTO.from(item));
+		srv.modify(FilmDTO.from(item));
 	}
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable int id) {
 		srv.deleteById(id);
-	}*/
+	}
 }

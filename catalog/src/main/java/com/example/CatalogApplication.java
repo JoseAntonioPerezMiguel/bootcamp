@@ -20,6 +20,6 @@ public class CatalogApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		filmSrv.getByProjection(FilmDTO.class).forEach(System.out::println);
+//		filmSrv.getByProjection(FilmDTO.class).forEach(System.out::println);
 	}
 }

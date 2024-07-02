@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 public interface FilmShort {
 
-	@Value("#{target.ActorId}")
+	@Value("#{target.FilmId}")
 	int getId();
 	
 	

@@ -94,7 +94,7 @@ public class FilmResource {
 	}
 
 	@PostMapping
-	public ResponseEntity<Object> create(@Valid @RequestBody Film item)
+	public ResponseEntity<Object> create(@Valid @RequestBody FilmDTO item)
 			throws BadRequestException, DuplicateKeyException, InvalidDataException {
 		var newItem = srv.add(FilmDTO.from(item));
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")

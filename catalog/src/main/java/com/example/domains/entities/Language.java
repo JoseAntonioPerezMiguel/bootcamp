@@ -44,6 +44,10 @@ public class Language extends EntityBase<Language> implements Serializable {
 
 	public Language() {
 	}
+	
+	public Language(int languageId) {
+		this.languageId = languageId;
+	}
 
 	public int getLanguageId() {
 		return this.languageId;
@@ -112,6 +116,8 @@ public class Language extends EntityBase<Language> implements Serializable {
 
 		return filmsVO;
 	}
+	
+	
 
 	@Override
 	public String toString() {

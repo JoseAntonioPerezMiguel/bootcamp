@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class LanguageDTO implements Serializable {
-	@JsonProperty("id")
+	@JsonProperty("language_id")
 	private int languageId;
 	
 	@JsonProperty("name")

@@ -16,11 +16,11 @@ import com.example.exceptions.InvalidDataException;
 import com.example.exceptions.NotFoundException;
 
 @Service
-public class FilmServiceImpl implements FilmService{
-	
+public class FilmServiceImpl implements FilmService {
+
 	private FilmRepository dao;
-	
-		public FilmServiceImpl(FilmRepository dao) {
+
+	public FilmServiceImpl(FilmRepository dao) {
 		this.dao = dao;
 	}
 
@@ -55,19 +55,24 @@ public class FilmServiceImpl implements FilmService{
 	}
 
 	@Override
+	public List<Film> getFilmsByCategory(int id) {
+		return dao.findByCategory(id);
+	}
+
+	@Override
 	public Optional<Film> getOne(Integer id) {
 		return dao.findById(id);
 	}
 
 	@Override
 	public Film add(Film item) throws DuplicateKeyException, InvalidDataException {
-		if(item == null) {
+		if (item == null) {
 			throw new InvalidDataException("No puede ser nulo");
 		}
-		if(item.isInvalid()) {
+		if (item.isInvalid()) {
 			throw new InvalidDataException(item.getErrorsMessage(), item.getErrorsFields());
 		}
-		if(item.getFilmId() != 0 && dao.existsById(item.getFilmId())) {
+		if (item.getFilmId() != 0 && dao.existsById(item.getFilmId())) {
 			throw new DuplicateKeyException("Ya existe");
 		}
 		return dao.save(item);
@@ -75,13 +80,13 @@ public class FilmServiceImpl implements FilmService{
 
 	@Override
 	public Film modify(Film item) throws NotFoundException, InvalidDataException {
-		if(item == null) {
+		if (item == null) {
 			throw new InvalidDataException("No puede ser nulo");
 		}
-		if(item.isInvalid()) {
+		if (item.isInvalid()) {
 			throw new InvalidDataException(item.getErrorsMessage(), item.getErrorsFields());
 		}
-		if(!dao.existsById(item.getFilmId())) {
+		if (!dao.existsById(item.getFilmId())) {
 			throw new NotFoundException();
 		}
 		return dao.save(item);

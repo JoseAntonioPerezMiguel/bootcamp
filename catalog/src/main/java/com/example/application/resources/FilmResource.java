@@ -63,6 +63,12 @@ public class FilmResource {
 		}
 		return FilmDTO.from(item.get());
 	}
+	
+	@GetMapping(path = "/category/{id}")
+	public List<FilmDTO> getByCategory(@PathVariable int id) throws NotFoundException {
+		var items = srv.getFilmsByCategory(id);
+		return items.stream().map(f -> FilmDTO.from(f)).toList();
+	}
 
 	@PostMapping
 	public ResponseEntity<Object> create(@Valid @RequestBody FilmDTO item)

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.annotation.PersistenceCreator;
 
 import com.example.domains.entities.Film;
 import com.example.domains.entities.Language;
@@ -48,7 +49,7 @@ public class FilmDTO implements Serializable {
 				filmDTO.getRentalDuration(), filmDTO.getRentalRate(), filmDTO.getReplacementCost(), new Language(filmDTO.languageId));
 	}
 
-	@PersistenceConstructor
+	@PersistenceCreator
 	public FilmDTO(int filmId, String title, Short releaseYear, byte rentalDuration, BigDecimal rentalRate,
 			BigDecimal replacementCost, Language language) {
 		this.filmId = filmId;

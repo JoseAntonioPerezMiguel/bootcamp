@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.example.core.contracts.services.FilmService;
 import com.example.domains.entities.models.FilmDTO;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootApplication
 public class CatalogApplication implements CommandLineRunner{
@@ -20,6 +21,9 @@ public class CatalogApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-//		filmSrv.getByProjection(FilmDTO.class).forEach(System.out::println);
+		ObjectMapper om = new ObjectMapper();
+		filmSrv.getByProjection(FilmDTO.class).forEach(System.out::println);
+//		System.out.println(om.writeValueAsString(filmSrv.getByProjection(FilmDTO.class).getFirst()));
+//		var dto = new FilmDTO()
 	}
 }

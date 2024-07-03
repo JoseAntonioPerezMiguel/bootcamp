@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 
 import com.example.domains.core.entities.EntityBase;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 /**
@@ -29,11 +30,13 @@ public class FilmCategory extends EntityBase<FilmCategory> implements Serializab
 	//bi-directional many-to-one association to Category
 	@ManyToOne
 	@JoinColumn(name="category_id", nullable=false, insertable=false, updatable=false)
+	@JsonManagedReference(value = "category-filmCategories")
 	private Category category;
 
 	//bi-directional many-to-one association to Film
 	@ManyToOne
 	@JoinColumn(name="film_id", nullable=false, insertable=false, updatable=false)
+	@JsonManagedReference(value = "film-filmCategories")
 	private Film film;
 
 	public FilmCategory() {

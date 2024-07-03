@@ -3,14 +3,18 @@ package com.example.domains.entities.models;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import org.springframework.data.annotation.PersistenceConstructor;
+
 import com.example.domains.entities.Film;
 import com.example.domains.entities.Language;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class FilmDTO implements Serializable {
 	
 	@JsonProperty("id")
@@ -41,9 +45,10 @@ public class FilmDTO implements Serializable {
 	
 	public static Film from(FilmDTO filmDTO) {
 		return new Film(filmDTO.getFilmId(),  filmDTO.getTitle(), filmDTO.getReleaseYear(), 
-				filmDTO.getRentalDuration(), filmDTO.getRentalRate(),  filmDTO.getReplacementCost(), new Language(filmDTO.languageId));
+				filmDTO.getRentalDuration(), filmDTO.getRentalRate(), filmDTO.getReplacementCost(), new Language(filmDTO.languageId));
 	}
 
+	@PersistenceConstructor
 	public FilmDTO(int filmId, String title, Short releaseYear, byte rentalDuration, BigDecimal rentalRate,
 			BigDecimal replacementCost, Language language) {
 		this.filmId = filmId;

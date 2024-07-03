@@ -64,7 +64,7 @@ public class Actor extends EntityBase<Actor> implements Serializable {
 
 	// bi-directional many-to-one association to FilmActorº
 	@OneToMany(mappedBy = "actor")
-	@JsonBackReference
+	@JsonBackReference(value = "actor-filmActors")
 	private List<FilmActor> filmActors;
 
 	public Actor() {

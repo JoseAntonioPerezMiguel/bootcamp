@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import com.example.domains.core.entities.EntityBase;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -40,7 +41,8 @@ public class Category extends EntityBase<Category> implements Serializable {
 
 	// bi-directional many-to-one association to FilmCategory
 	@OneToMany(mappedBy = "category")
-	@JsonIgnore
+//	@JsonIgnore
+	@JsonBackReference(value = "category-filmCategories")
 	private List<FilmCategory> filmCategories;
 
 	public Category() {

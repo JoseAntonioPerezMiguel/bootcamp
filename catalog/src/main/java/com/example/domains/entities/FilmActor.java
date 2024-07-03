@@ -29,12 +29,13 @@ public class FilmActor extends EntityBase<FilmActor> implements Serializable {
 	// bi-directional many-to-one association to Actor
 	@ManyToOne
 	@JoinColumn(name = "actor_id", nullable = false, insertable = false, updatable = false)
-	@JsonManagedReference
+	@JsonManagedReference(value = "actor-filmActors")
 	private Actor actor;
 
 	// bi-directional many-to-one association to Film
 	@ManyToOne
 	@JoinColumn(name = "film_id", nullable = false, insertable = false, updatable = false)
+	@JsonManagedReference(value = "film-filmActors")
 	private Film film;
 
 	public FilmActor() {

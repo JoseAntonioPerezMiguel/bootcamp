@@ -46,7 +46,7 @@ public class FilmDTO implements Serializable {
 	
 	public static Film from(FilmDTO filmDTO) {
 		return new Film(filmDTO.getFilmId(),  filmDTO.getTitle(), filmDTO.getReleaseYear(), 
-				filmDTO.getRentalDuration(), filmDTO.getRentalRate(), filmDTO.getReplacementCost(), new Language(filmDTO.languageId));
+				filmDTO.getRentalDuration(), filmDTO.getRentalRate(), filmDTO.getReplacementCost(), new Language(filmDTO.getLanguageId()));
 	}
 
 	@PersistenceCreator

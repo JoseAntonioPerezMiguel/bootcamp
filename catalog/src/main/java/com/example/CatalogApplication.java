@@ -16,13 +16,13 @@ public class CatalogApplication implements CommandLineRunner{
 		SpringApplication.run(CatalogApplication.class, args);
 	}
 
-	@Autowired
-	FilmService filmSrv;
+//	@Autowired
+//	FilmService filmSrv;
 
 	@Override
 	public void run(String... args) throws Exception {
-		ObjectMapper om = new ObjectMapper();
-		filmSrv.getByProjection(FilmDTO.class).forEach(System.out::println);
+//		ObjectMapper om = new ObjectMapper();
+//		filmSrv.getByProjection(FilmDTO.class).forEach(System.out::println);
 //		System.out.println(om.writeValueAsString(filmSrv.getByProjection(FilmDTO.class).getFirst()));
 //		var dto = new FilmDTO()
 	}

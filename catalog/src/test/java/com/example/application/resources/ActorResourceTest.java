@@ -6,7 +6,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,35 +24,35 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.example.core.contracts.services.FilmService;
+import com.example.core.contracts.services.ActorService;
+import com.example.domains.entities.Actor;
 import com.example.domains.entities.Film;
 import com.example.domains.entities.Language;
-import com.example.domains.entities.models.FilmDTO;
-import com.example.domains.entities.models.FilmShort;
+import com.example.domains.entities.models.ActorDTO;
+import com.example.domains.entities.models.ActorShort;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.Value;
 
-@WebMvcTest(FilmResource.class)
-class FilmResourceTest {
+@WebMvcTest(ActorResource.class)
+class ActorResourceTest {
     @Autowired
     private MockMvc mockMvc;
     
     @MockBean
-    private FilmService srv;
+    private ActorService srv;
 
     @Autowired
     ObjectMapper objectMapper;
     
-    List<Film> films;
+    List<Actor> actors;
     
     @BeforeEach
     void setUp() throws Exception {
-        films = new ArrayList<>(
-                Arrays.asList(new Film(1, "Film1", (short) 2001, (byte)7, new BigDecimal(7.1), new BigDecimal(2.4), new Language(1)),
-                		new Film(2, "Film2", (short) 2002, (byte)8, new BigDecimal(7.2), new BigDecimal(2.4), new Language(1)),
-                		new Film(3, "Film3", (short) 2003, (byte)9, new BigDecimal(7.3), new BigDecimal(2.4), new Language(1))
-                              ));
+        actors = new ArrayList<>(
+                Arrays.asList(new Actor(1, "Actor1", "LastName1"),
+                              new Actor(2, "Actor2", "LastName2"),
+                              new Actor(3, "Actor3", "LastName3")));
     }
 
     @AfterEach
@@ -61,19 +60,19 @@ class FilmResourceTest {
     }
     
     @Value
-    static class FilmShortMock implements FilmShort {
+    static class ActorShortMock implements ActorShort {
         int id;
-        String title;
+        String nombre;
     }
     
     @Test
     void testGetAllString() throws Exception {
-        List<FilmDTO> list = films.stream()
-                .map(FilmDTO::from)
+        List<ActorDTO> list = actors.stream()
+                .map(ActorDTO::from)
                 .toList();
-        when(srv.getByProjection(FilmDTO.class)).thenReturn(list);
+        when(srv.getByProjection(ActorDTO.class)).thenReturn(list);
         
-        mockMvc.perform(get("/api/films/v1?mode=large").accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/api/actors/v1?mode=large").accept(MediaType.APPLICATION_JSON))
             .andExpectAll(
                     status().isOk(), 
                     content().contentType("application/json"),
@@ -84,77 +83,76 @@ class FilmResourceTest {
     @Test
     void testGetById() throws Exception {
         int id = 1;
-        var ele = films.get(0);
+        var ele = actors.get(0);
         when(srv.getOne(id)).thenReturn(Optional.of(ele));
         
-        mockMvc.perform(get("/api/films/v1/{id}", id))
+        mockMvc.perform(get("/api/actors/v1/{id}", id))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.id").value(id))
-            .andExpect(jsonPath("$.title").value(ele.getTitle()))
+            .andExpect(jsonPath("$.firstName").value(ele.getFirstName()))
+            .andExpect(jsonPath("$.lastName").value(ele.getLastName()))
             .andDo(print());
     }
 
     @Test
-    void testGetByCategory() throws Exception {
-        int categoryId = 1;
-        List<FilmDTO> list = films.stream().map(FilmDTO::from).toList();
+    void testGetById404() throws Exception {
+        int id = 1;
+        when(srv.getOne(id)).thenReturn(Optional.empty());
         
-        when(srv.getFilmsByCategory(categoryId)).thenReturn(films);
-        
-        mockMvc.perform(get("/api/films/v1/category/{id}", categoryId))
-            .andExpect(status().isOk())
-            .andExpect(jsonPath("$.size()").value(3))
+        mockMvc.perform(get("/api/actors/v1/{id}", id))
+            .andExpect(status().isNotFound())
+            .andExpect(jsonPath("$.title").value("Not Found"))
             .andDo(print());
     }
-    
+
     @Test
-    void testGetByLanguage() throws Exception {
-        int languageId = 1;
-        List<FilmDTO> list = films.stream().map(FilmDTO::from).toList();
+    void testRetireActor() throws Exception {
+        int id = 1;
+        var ele = actors.get(0);
+        when(srv.getOne(id)).thenReturn(Optional.of(ele));
         
-        when(srv.getFilmsByLanguage(languageId)).thenReturn(films);
-        
-        mockMvc.perform(get("/api/films/v1/language/{id}", languageId))
-            .andExpect(status().isOk())
-            .andExpect(jsonPath("$.size()").value(3))
+        mockMvc.perform(put("/api/actors/v1/{id}/retirement", id))
+            .andExpect(status().isAccepted())
             .andDo(print());
+        
+        verify(ele).retirement();
     }
     
     @Test
     void testCreate() throws Exception {
         int id = 1;
-        var ele = films.get(0);
-        when(srv.add(any(Film.class))).thenReturn(ele);
+        var ele = actors.get(0);
+        when(srv.add(any(Actor.class))).thenReturn(ele);
         
-        mockMvc.perform(post("/api/films/v1")
+        mockMvc.perform(post("/api/actors/v1")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(FilmDTO.from(ele)))
+            .content(objectMapper.writeValueAsString(ActorDTO.from(ele)))
             )
             .andExpect(status().isCreated())
-            .andExpect(header().string("Location", "http://localhost/api/films/v1/1"))
+            .andExpect(header().string("Location", "http://localhost/api/actors/v1/1"))
             .andDo(print());
     }
 
     @Test
     void testUpdate() throws Exception {
         int id = 1;
-        var ele = films.get(0);
+        var ele = actors.get(0);
         
-        mockMvc.perform(put("/api/films/v1/{id}", id)
+        mockMvc.perform(put("/api/actors/v1/{id}", id)
             .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(FilmDTO.from(ele)))
+            .content(objectMapper.writeValueAsString(ActorDTO.from(ele)))
             )
             .andExpect(status().isNoContent())
             .andDo(print());
         
-        verify(srv).modify(any(Film.class));
+        verify(srv).modify(any(Actor.class));
     }
 
     @Test
     void testDelete() throws Exception {
         int id = 1;
         
-        mockMvc.perform(delete("/api/films/v1/{id}", id))
+        mockMvc.perform(delete("/api/actors/v1/{id}", id))
             .andExpect(status().isNoContent())
             .andDo(print());
         

@@ -1,5 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { LoggerService } from '@my/core';
+import { Subject } from 'rxjs';
+
 export enum NotificationType {
   error = 'error',
   warn = 'warn',
@@ -10,9 +12,10 @@ export enum NotificationType {
 @Injectable({
   providedIn: 'root',
 })
-export class NotificationService {
+export class NotificationService implements OnDestroy {
   public readonly NotificationType = NotificationType;
   private listado: Notification[] = [];
+  private notificacion$ = new Subject<Notification>();
 
   public get Listado(): Notification[] {
     return Object.assign([], this.listado);
@@ -20,6 +23,8 @@ export class NotificationService {
   public get HayNotificaciones() {
     return this.listado.length > 0;
   }
+
+  public get Notificacion() { return this.notificacion$; }
 
   constructor(private out: LoggerService) {}
 
@@ -33,6 +38,7 @@ export class NotificationService {
       : 1;
     const n = new Notification(id, msg, type);
     this.listado.push(n);
+    this.notificacion$.next(n);
     if (type === NotificationType.error) {
       this.out.error(`NOTIFICATION: ${msg}`);
     }
@@ -50,6 +56,10 @@ export class NotificationService {
     if (this.HayNotificaciones) {
       this.listado.splice(0);
     }
+  }
+
+  ngOnDestroy(): void {
+    this.notificacion$.complete();
   }
 }
 

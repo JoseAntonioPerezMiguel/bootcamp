@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SecurityModule } from './security';
 import { LoggerService, MyCoreModule } from '@my/core';
-import { NotificationComponent } from './main/notification/notification.component';
+// import { NotificationComponent } from './main/notification/notification.component';
 import { DemosComponent } from './demos/demos.component';
 import { NotificationModalComponent } from './main';
 

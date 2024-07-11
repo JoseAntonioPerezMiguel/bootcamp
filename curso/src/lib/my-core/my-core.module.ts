@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { PIPES_STRINGS } from './pipes/strings.pipe';
 
 
 
 @NgModule({
   declarations: [],
-  exports: [],
+  exports: [ PIPES_STRINGS],
   imports: [
-    CommonModule
+    CommonModule, PIPES_STRINGS
   ]
 })
 export class MyCoreModule { }

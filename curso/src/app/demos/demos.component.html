@@ -1,4 +1,4 @@
-<h1>Hola {{Name}}</h1>
+<h1>Hola {{Name | elipsis: 10 | uppercase}}</h1>
 <p>
     <input type="text" [(ngModel)]="Name">
     <input type="button" value="greet" (click)="greet()">
@@ -30,13 +30,13 @@
 <p [class.semivisible]="!visible">Ahora me ves bien</p>
 
 <p>
-    Calcula: 2 + 2 = {{2+2}} = {{calculate(2,2)}}
+    Calcula: 2 + 2 = {{2+2 | number: '2.2-3'}} = {{calculate(2,2) | currency: 'EUR':'symbol':'1.2-2' }}
 </p>
 
 <ul>
     <li *ngFor="let item of provincesList; let index=index; let background=odd;"
     [style.background-color]="background ? 'LightBlue' : 'Lavender'">
-    {{item.name}} ({{item.id}}) [Element {{index + 1}} of {{provincesList.length}}]
+    {{item.name | titlecase}} ({{item.id}}) [Element {{index + 1}} of {{provincesList.length}}]
 </li>
 </ul>
 
@@ -49,3 +49,4 @@
     <input type="text" value="Tabarnia" #txtProvincia >
     <input type="button" value="add" (click)="add(txtProvincia.value)" >
   </p>
+  <p>{{provincesList | json}}</p>

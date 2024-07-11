@@ -23,7 +23,12 @@
 
 <p *ngIf="visible">Ahora existo</p>
 
-<p [ngClass]="looking">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est autem voluptatum neque id expedita ut ipsam, obcaecati
+@if(visible) {
+<p>Ahora existe</p>
+}
+
+<p [ngClass]="looking">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est autem voluptatum neque id expedita
+    ut ipsam, obcaecati
     aspernatur, magni unde rem cupiditate laborum, ratione fugit optio dolore quo repellendus recusandae.
 </p>
 
@@ -35,18 +40,23 @@
 
 <ul>
     <li *ngFor="let item of provincesList; let index=index; let background=odd;"
-    [style.background-color]="background ? 'LightBlue' : 'Lavender'">
-    {{item.name | titlecase}} ({{item.id}}) [Element {{index + 1}} of {{provincesList.length}}]
-</li>
+        [style.background-color]="background ? 'LightBlue' : 'Lavender'">
+        {{item.name | titlecase}} ({{item.id}}) [Element {{index + 1}} of {{provincesList.length}}]
+    </li>
+    @for(item of provincesList; track item.id) {
+    <li [style.background-color]="$odd ? 'LightBlue' : 'Lavender'">
+        {{item.name | titlecase}} ({{item.id}}) [Elemento {{$index + 1}} de {{provincesList.length}}]
+    </li>
+    }
 </ul>
 
 <p>
-    <select [(ngModel)]="idProvince" >
-      <option value="">--Elige opción--</option>
-      <option *ngFor="let p of provincesList" [value]="p.id">{{p.name  | capitalize}}</option>
+    <select [(ngModel)]="idProvince">
+        <option value="">--Elige opción--</option>
+        <option *ngFor="let p of provincesList" [value]="p.id">{{p.name | capitalize}}</option>
     </select>
     Selección: {{idProvince}}
-    <input type="text" value="Tabarnia" #txtProvincia >
-    <input type="button" value="add" (click)="add(txtProvincia.value)" >
-  </p>
-  <p>{{provincesList | json}}</p>
+    <input type="text" value="Tabarnia" #txtProvincia>
+    <input type="button" value="add" (click)="add(txtProvincia.value)">
+</p>
+<p>{{provincesList | json}}</p>

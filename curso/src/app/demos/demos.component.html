@@ -1,4 +1,11 @@
+<h1>Hola {{Name}}</h1>
 <p>
+    <input type="text" [(ngModel)]="Name">
+    <input type="button" value="greet" (click)="greet()">
+    <input type="button" value="goodbye" (click)="goodbye()">
+    <input type="button" value="say" (click)="say('something')">
+    <input type="button" value="switch" (click)="switchVisibility()">
+
     <input type="button" value="Error" (click)="vm.add('Esto es una notificación de error')">
     <input type="button" value="Warn" (click)="vm.add('Esta notificación es un aviso',
     vm.NotificationType.warn)">
@@ -7,3 +14,38 @@
     <input type="button" value="Log" (click)="vm.add('Para trazar con notificaciones',
     vm.NotificationType.log)">
 </p>
+
+<p [textContent]="result">Esto se pierde</p>
+<p [innerHTML]="result">Esto se pierde</p>
+<p>{{date}}</p>
+
+<p [hidden]="!visible">Ahora me ves</p>
+
+<p *ngIf="visible">Ahora existo</p>
+
+<p [ngClass]="looking">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est autem voluptatum neque id expedita ut ipsam, obcaecati
+    aspernatur, magni unde rem cupiditate laborum, ratione fugit optio dolore quo repellendus recusandae.
+</p>
+
+<p [class.semivisible]="!visible">Ahora me ves bien</p>
+
+<p>
+    Calcula: 2 + 2 = {{2+2}} = {{calculate(2,2)}}
+</p>
+
+<ul>
+    <li *ngFor="let item of provincesList; let index=index; let background=odd;"
+    [style.background-color]="background ? 'LightBlue' : 'Lavender'">
+    {{item.name}} ({{item.id}}) [Element {{index + 1}} of {{provincesList.length}}]
+</li>
+</ul>
+
+<p>
+    <select [(ngModel)]="idProvince" >
+      <option value="">--Elige opción--</option>
+      <option *ngFor="let p of provincesList" [value]="p.id">{{p.name}}</option>
+    </select>
+    Selección: {{idProvince}}
+    <input type="text" value="Tabarnia" #txtProvincia >
+    <input type="button" value="add" (click)="add(txtProvincia.value)" >
+  </p>

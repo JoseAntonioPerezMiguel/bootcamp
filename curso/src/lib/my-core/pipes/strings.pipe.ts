@@ -12,4 +12,35 @@ export class ElipsisPipe implements PipeTransform {
   }
 }
 
-export const PIPES_STRINGS = [ ElipsisPipe ]
+@Pipe({
+  name: 'capitalize',
+  standalone: true,
+})
+export class CapitalizePipe implements PipeTransform {
+  transform(value: string): any {
+    return value
+      ?.toString()
+      .toLowerCase()
+      .split('.')
+      .map((frase) => frase.trim())
+      .map((frase, index, array) =>
+        frase.length === 0
+          ? array.length > 1 && index + 1 < array.length
+            ? array[index + 1] === ''
+              ? '.'
+              : '. '
+            : ''
+          : frase.charAt(0)?.toUpperCase() +
+            frase?.substring(1) +
+            (array.length > 1 && index + 1 < array.length
+              ? array[index + 1] === ''
+                ? '.'
+                : '. '
+              : '')
+      )
+      .join('')
+      .trim();
+  }
+}
+
+export const PIPES_STRINGS = [ElipsisPipe, CapitalizePipe];

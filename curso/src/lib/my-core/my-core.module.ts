@@ -6,7 +6,7 @@ import { PIPES_STRINGS } from './pipes/strings.pipe';
 
 @NgModule({
   declarations: [],
-  exports: [ PIPES_STRINGS],
+  exports: [ PIPES_STRINGS ],
   imports: [
     CommonModule, PIPES_STRINGS
   ]

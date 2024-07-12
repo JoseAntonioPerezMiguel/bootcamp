@@ -1,22 +1,29 @@
 <div class="calculator">
     <div class="display">{{ display }}</div>
     <div class="buttons">
-        <button (click)="addNumber(1)">1</button>
-        <button (click)="addNumber(2)">2</button>
-        <button (click)="addNumber(3)">3</button>
-        <button (click)="addOperator('+')">+</button>
-        <button (click)="addNumber(4)">4</button>
-        <button (click)="addNumber(5)">5</button>
-        <button (click)="addNumber(6)">6</button>
-        <button (click)="addOperator('-')">-</button>
+        <button (click)="addOperator('%')">%</button>
+        <button (click)="addOperator('CE')">CE</button>
+        <button (click)="clear()">C</button>
+        <button (click)="clear()">DEL</button>
+        <button (click)="addOperator('1/x')">1/x</button>
+        <button (click)="square()">x^2</button>
+        <button (click)="addOperator('sqrt(x)')">sqrt(x)</button>
+        <button (click)="addOperator('/')">/</button>
         <button (click)="addNumber(7)">7</button>
         <button (click)="addNumber(8)">8</button>
         <button (click)="addNumber(9)">9</button>
         <button (click)="addOperator('*')">*</button>
-        <button (click)="addComma()">,</button>
+        <button (click)="addNumber(4)">4</button>
+        <button (click)="addNumber(5)">5</button>
+        <button (click)="addNumber(6)">6</button>
+        <button (click)="addOperator('-')">-</button>
+        <button (click)="addNumber(1)">1</button>
+        <button (click)="addNumber(2)">2</button>
+        <button (click)="addNumber(3)">3</button>
+        <button (click)="addOperator('+')">+</button>
+        <button (click)="toggleSign()">+/-</button>
         <button (click)="addNumber(0)">0</button>
-        <button (click)="addOperator('/')">/</button>
+        <button (click)="addComma()">,</button>
         <button (click)="calculateButton()">=</button>
-        <button (click)="clear()">C</button>
     </div>
 </div>

@@ -73,4 +73,30 @@ export class CalculatorComponent {
     this.operandos[1] = ''
     this.operator = ''
   }
+
+  toggleSign() {
+    if (this.operator === '') {
+      if (this.operandos[0] !== '') {
+        this.operandos[0] = (parseFloat(this.operandos[0]) * -1).toString();
+        this.display = this.operandos[0];
+      }
+    } else {
+      if (this.operandos[1] !== '') {
+        this.operandos[1] = (parseFloat(this.operandos[1]) * -1).toString();
+        this.display = this.operandos[0] + this.operator + this.operandos[1];
+      }
+    }
+  }
+
+  square() {
+    if (this.operator === '') {
+      const num = parseFloat(this.operandos[0])
+      this.operandos[0] = (num * num).toString()
+      this.display = this.operandos[0]
+    } else {
+      const num = parseFloat(this.operandos[1])
+      this.operandos[1] = (num * num).toString()
+      this.display = this.operandos[0] + this.operator + this.operandos[1]
+    } 
+  }
 }

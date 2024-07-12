@@ -1,4 +1,4 @@
-<div class="calculator">
+<div class="calculator" tabindex="0" (keydown)="handleKeyPress($event)">
     <div class="display">{{ display }}</div>
     <div class="buttons">
         <button (click)="addOperator('%')">%</button>

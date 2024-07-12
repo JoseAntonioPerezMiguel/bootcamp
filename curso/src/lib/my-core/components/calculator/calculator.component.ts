@@ -37,7 +37,7 @@ export class CalculatorComponent {
 
   addOperator(operator: string) {
     if (this.operator !== '' && this.operandos[1] !== '') {
-      this.operandos[0] = this.calculate().toString();
+      this.operandos[0] = this.calculate().toPrecision(15).toString();
       this.operandos[1] = '';
       this.display = this.operandos[0] + operator;
     } else {
@@ -64,7 +64,7 @@ export class CalculatorComponent {
   }
 
   calculateButton() {
-    this.display = this.calculate().toString();
+    this.display = this.calculate().toPrecision(15).toString();
   }
 
   clear() {
@@ -128,6 +128,32 @@ export class CalculatorComponent {
     } else {
       this.operandos[1] = this.operandos[1].slice(0, -1);
       this.display = this.operandos[0] + this.operator + this.operandos[1];
+    }
+  }
+
+  handleKeyPress(event: KeyboardEvent) {
+    const key = event.key;
+
+    if (!isNaN(Number(key))) {
+      this.addNumber(Number(key));
+    } else if (key === '.') {
+      this.addComma();
+    } else if (key === '+' || key === '-' || key === '*' || key === '/') {
+      this.addOperator(key);
+    } else if (key === 'Enter') {
+      this.calculateButton();
+    } else if (key === 'Backspace') {
+      this.delete();
+    } else if (key === 'Escape') {
+      this.clear();
+    } else if (key === '%') {
+      this.addOperator('%');
+    } else if (key === 'x') {
+      this.oneOperatorOperation('square');
+    } else if (key === 'r') {
+      this.oneOperatorOperation('sqrt');
+    } else if (key === 'i') {
+      this.oneOperatorOperation('1/x');
     }
   }
 }

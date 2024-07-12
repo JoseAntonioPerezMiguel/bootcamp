@@ -117,4 +117,17 @@ export class CalculatorComponent {
       this.display = this.operandos[0] + this.operator + this.operandos[1];
     }
   }
+
+  delete() {
+    if (this.operator === '') {
+      this.operandos[0] = this.operandos[0].slice(0, -1);
+      this.display = this.operandos[0];
+    } else if (this.operandos[1] === '') {
+      this.operator = '';
+      this.display = this.operandos[0];
+    } else {
+      this.operandos[1] = this.operandos[1].slice(0, -1);
+      this.display = this.operandos[0] + this.operator + this.operandos[1];
+    }
+  }
 }

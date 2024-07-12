@@ -2,9 +2,8 @@
     <div class="display">{{ display }}</div>
     <div class="buttons">
         <button (click)="addOperator('%')">%</button>
-        <button (click)="addOperator('CE')">CE</button>
         <button (click)="clear()">C</button>
-        <button (click)="clear()">DEL</button>
+        <button class="wide" (click)="delete()">DEL</button>
         <button (click)="oneOperatorOperation('1/x')">1/x</button>
         <button (click)="oneOperatorOperation('square')">x^2</button>
         <button (click)="oneOperatorOperation('sqrt')">sqrt(x)</button>

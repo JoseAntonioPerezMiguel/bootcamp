@@ -99,4 +99,16 @@ export class CalculatorComponent {
       this.display = this.operandos[0] + this.operator + this.operandos[1]
     } 
   }
+
+  sqrt() {
+    if (this.operator === '') {
+      const num = parseFloat(this.operandos[0])
+      this.operandos[0] = Math.sqrt(num).toString()
+      this.display = this.operandos[0]
+    } else {
+      const num = parseFloat(this.operandos[1])
+      this.operandos[1] = Math.sqrt(num).toString()
+      this.display = this.operandos[0] + this.operator + this.operandos[1]
+    } 
+  }
 }

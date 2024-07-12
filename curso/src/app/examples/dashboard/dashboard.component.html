@@ -1,1 +1,9 @@
-<p>dashboard works!</p>
+<header>
+    @for (item of menu; track item) {
+        <button type="button" (click)="select($index)" >{{item.text}}</button>
+    }
+</header>
+<app-notification />
+<main class="container-fluid">
+    <ng-container *ngComponentOutlet="actual"/>
+</main>

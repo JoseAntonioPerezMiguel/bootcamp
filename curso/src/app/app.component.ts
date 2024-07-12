@@ -6,11 +6,12 @@ import { /*LoggerService,*/ MyCoreModule } from '@my/core';
 import { DemosComponent } from './examples/demos/demos.component';
 import { NotificationModalComponent } from './main';
 import { HomeComponent } from "./main/home/home.component";
+import { DashboardComponent } from "./examples/dashboard/dashboard.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, SecurityModule, MyCoreModule, NotificationModalComponent, DemosComponent, HomeComponent],
+  imports: [RouterOutlet, SecurityModule, MyCoreModule, NotificationModalComponent, DemosComponent, HomeComponent, DashboardComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

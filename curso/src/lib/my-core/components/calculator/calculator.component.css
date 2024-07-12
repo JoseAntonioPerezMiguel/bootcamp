@@ -26,6 +26,14 @@ button {
     font-size: 18px;
 }
 
+button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  button:active {
+    transform: scale(0.95);
+  }
+
 button.wide {
     grid-column: span 2;
-  }
+}

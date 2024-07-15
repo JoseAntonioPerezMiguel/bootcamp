@@ -5,6 +5,7 @@ import GraficoSvgComponent from 'src/lib/my-core/components/grafico-svg/grafico-
 import { NotificationComponent } from "../../main/notification/notification.component";
 import { CommonModule } from '@angular/common';
 import { CalculatorComponent } from 'src/lib/my-core/components/calculator/calculator.component';
+import { FormsComponent } from '../forms/forms.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +20,8 @@ export class DashboardComponent {
     {text: 'Home', icon: '', component: HomeComponent},
     {text: 'Demos', icon: '', component: DemosComponent},
     {text: 'Graphic', icon: '', component: GraficoSvgComponent},
-    {text: 'Calculator', icon: '', component: CalculatorComponent}
+    {text: 'Calculator', icon: '', component: CalculatorComponent},
+    {text: 'Forms', icon: '', component: FormsComponent},
   ]
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

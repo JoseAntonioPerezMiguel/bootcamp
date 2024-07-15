@@ -1,0 +1,27 @@
+<h1>Película</h1>
+@if(VM.Elemento) {
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-6">
+        <div class="well well-sm">
+            <div class="col-sm-6 col-md-8">
+                <h4>{{VM.Elemento.titulo}}</h4>
+                <p>
+                    <strong>Director:</strong> {{VM.Elemento.director}}
+                    <br />
+                    <strong>Duración:</strong> {{VM.Elemento.duracion}} minutos
+                    <br />
+                    <strong>Género:</strong> {{VM.Elemento.genero}}
+                    <br />
+                    <strong>Idioma:</strong> {{VM.Elemento.idioma}}
+                    <br />
+                    <strong>Precio:</strong> ${{VM.Elemento.precio}}
+                    <br />
+                    <strong>Año:</strong> {{VM.Elemento["año"]}}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+} @else {
+<h2>Sin datos</h2>
+}

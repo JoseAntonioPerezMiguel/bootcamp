@@ -1,0 +1,67 @@
+<h1>Película</h1>
+@if(VM.Elemento) {
+<form #miForm="ngForm" class="row gy-2 gx-2 align-items-start">
+    @if (VM.Modo==='add') {
+    <div class="form-floating col-md-2">
+        <input class="form-control" [class.is-invalid]="id.invalid && miForm.dirty" type="number" name="id" id="id"
+            [(ngModel)]="VM.Elemento.id" #id="ngModel" required min="0" placeholder=" ">
+        <label for="id">Código:</label>
+        <output class="invalid-feedback" [hidden]="id.valid">{{id.errors | errormsg}}</output>
+    </div>
+    } @else {
+    <div class="col-md-2">
+        <label class="form-label-sm" for="id">Código:</label>
+        <output class="d-block" [textContent]="VM.Elemento.id"></output>
+    </div>
+    }
+    <div class="form-floating col-md-4">
+        <input class="form-control" [class.is-invalid]="titulo.invalid" type="text" name="titulo" id="titulo"
+            [(ngModel)]="VM.Elemento.titulo" #titulo="ngModel" required minlength="2" maxlength="100" placeholder=" ">
+        <label for="titulo">Título:</label>
+        <output class="invalid-feedback" [hidden]="titulo.valid">{{titulo.errors | errormsg}}</output>
+    </div>
+    <div class="form-floating col-md-4">
+        <input class="form-control" [class.is-invalid]="director.invalid" type="text" name="director" id="director"
+            [(ngModel)]="VM.Elemento.director" #director="ngModel" required minlength="2" maxlength="50"
+            placeholder=" ">
+        <label for="director">Director:</label>
+        <output class="invalid-feedback" [hidden]="director.valid">{{director.errors | errormsg}}</output>
+    </div>
+    <div class="form-floating col-md-2">
+        <input class="form-control" [class.is-invalid]="duracion.invalid" type="number" name="duracion" id="duracion"
+            [(ngModel)]="VM.Elemento.duracion" #duracion="ngModel" required min="1" placeholder=" ">
+        <label for="duracion">Duración (min):</label>
+        <output class="invalid-feedback" [hidden]="duracion.valid">{{duracion.errors | errormsg}}</output>
+    </div>
+    <div class="form-floating col-md-4">
+        <input class="form-control" [class.is-invalid]="genero.invalid" type="text" name="genero" id="genero"
+            [(ngModel)]="VM.Elemento.genero" #genero="ngModel" required minlength="2" maxlength="50" placeholder=" ">
+        <label for="genero">Género:</label>
+        <output class="invalid-feedback" [hidden]="genero.valid">{{genero.errors | errormsg}}</output>
+    </div>
+    <div class="form-floating col-md-4">
+        <input class="form-control" [class.is-invalid]="idioma.invalid" type="text" name="idioma" id="idioma"
+            [(ngModel)]="VM.Elemento.idioma" #idioma="ngModel" required minlength="2" maxlength="50" placeholder=" ">
+        <label for="idioma">Idioma:</label>
+        <output class="invalid-feedback" [hidden]="idioma.valid">{{idioma.errors | errormsg}}</output>
+    </div>
+    <div class="form-floating col-md-2">
+        <input class="form-control" [class.is-invalid]="precio.invalid" type="number" name="precio" id="precio"
+            [(ngModel)]="VM.Elemento.precio" #precio="ngModel" required min="0" step="0.01" placeholder=" ">
+        <label for="precio">Precio:</label>
+        <output class="invalid-feedback" [hidden]="precio.valid">{{precio.errors | errormsg}}</output>
+    </div>
+    <div class="form-floating col-md-2">
+        <input class="form-control" [class.is-invalid]="ano.invalid" type="number" name="ano" id="ano"
+            [(ngModel)]="VM.Elemento.ano" #ano="ngModel" required min="1900" max="2100" placeholder=" ">
+        <label for="ano">Año:</label>
+        <output class="invalid-feedback" [hidden]="ano.valid">{{ano.errors | errormsg}}</output>
+    </div>
+    <div class="mt-2">
+        <input type="button" class="btn btn-success" value="Enviar" (click)="VM.send()" [disabled]="miForm.invalid">
+        <input type="button" class="btn btn-info" value="Volver" (click)="VM.cancel()">
+    </div>
+</form>
+} @else {
+<h2>Sin datos</h2>
+}

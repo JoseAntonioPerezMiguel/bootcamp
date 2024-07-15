@@ -6,11 +6,12 @@ import { NotificationComponent } from "../../main/notification/notification.comp
 import { CommonModule } from '@angular/common';
 import { CalculatorComponent } from 'src/lib/my-core/components/calculator/calculator.component';
 import { FormsComponent } from '../forms/forms.component';
+import { ContactosComponent } from 'src/app/contactos';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [NotificationComponent, CommonModule, AjaxWaitComponent,],
+  imports: [NotificationComponent, CommonModule, AjaxWaitComponent, ContactosComponent, ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
@@ -22,6 +23,7 @@ export class DashboardComponent {
     {text: 'Graphic', icon: '', component: GraficoSvgComponent},
     {text: 'Calculator', icon: '', component: CalculatorComponent},
     {text: 'Forms', icon: '', component: FormsComponent},
+    {text: 'Contacts', icon: '', component: ContactosComponent},
   ]
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

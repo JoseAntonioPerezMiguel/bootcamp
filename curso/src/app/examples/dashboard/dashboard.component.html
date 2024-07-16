@@ -1,9 +1,12 @@
 <header>
     @for (item of menu; track item) {
-        <button type="button" (click)="select($index)" >{{item.text}}</button>
+    <button type="button" (click)="select($index)">{{item.text}}</button>
     }
+    <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/contactos']" routerLinkActive="active">contactos</a>
+    </li>
 </header>
 <app-notification />
 <main class="container-fluid">
-    <ng-container *ngComponentOutlet="actual"/>
+    <ng-container *ngComponentOutlet="actual" />
 </main>

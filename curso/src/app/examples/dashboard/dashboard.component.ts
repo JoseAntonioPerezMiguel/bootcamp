@@ -8,11 +8,12 @@ import { CalculatorComponent } from 'src/lib/my-core/components/calculator/calcu
 import { FormsComponent } from '../forms/forms.component';
 import { ContactosComponent } from 'src/app/contactos';
 import { PeliculasComponent } from 'src/app/peliculas';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [NotificationComponent, CommonModule, AjaxWaitComponent, ContactosComponent, PeliculasComponent,],
+  imports: [NotificationComponent, CommonModule, AjaxWaitComponent, ContactosComponent, PeliculasComponent, RouterModule, ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })

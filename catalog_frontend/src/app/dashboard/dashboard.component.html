@@ -1,0 +1,8 @@
+<header>
+    @for (item of menu; track item) {
+    <button type="button" (click)="select($index)">{{item.text}}</button>
+    }
+</header>
+<main class="container-fluid">
+    <ng-container *ngComponentOutlet="actual" />
+</main>

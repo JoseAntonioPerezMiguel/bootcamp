@@ -1,9 +1,12 @@
 <table class="table table-striped table-hover">
     <thead>
         <tr class="table-info">
-            <th class="display-4">Films list</th>
-            <th class="text-end"><button class="btn btn-success" (click)="VM.add()"><i class="fas fa-plus"></i>
-                    Añadir</button></th>
+            <th class="display-4">Actors List</th>
+            <th class="text-end">
+                <button class="btn btn-success" (click)="VM.add()">
+                    <i class="fas fa-plus"></i> Add
+                </button>
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -16,9 +19,8 @@
                         </div>
                         <div class="col-md-10">
                             <button type="button" class="btn btn-link btn-lg px-0" (click)="VM.view(item.id)">
-                                {{item.title | capitalizeAllWords}}</button>
-                            <br>
-                            <b>Year:</b> {{item.release_year}} <b>Rental duration:</b> {{item.rental_duration}} days
+                                {{item.name | capitalize}} {{item.lastname | capitalize}}
+                            </button>
                         </div>
                     </div>
                 </div>

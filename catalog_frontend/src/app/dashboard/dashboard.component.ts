@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FilmsComponent } from '../films';
+import { ActorsComponent } from '../actors';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,6 +15,7 @@ export class DashboardComponent {
 
   menu = [
     {text: 'Films', icon: '', component: FilmsComponent},
+    {text: 'Actors', icon: '', component: ActorsComponent},
   ]
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

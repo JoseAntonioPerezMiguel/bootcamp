@@ -16,7 +16,7 @@
                         </div>
                         <div class="col-md-10">
                             <button type="button" class="btn btn-link btn-lg px-0" (click)="VM.view(item.id)">
-                                {{item.title}}</button>
+                                {{item.title | capitalizeAllWords}}</button>
                             <br>
                             <b>Year:</b> {{item.release_year}} <b>Rental duration:</b> {{item.rental_duration}} days
                         </div>

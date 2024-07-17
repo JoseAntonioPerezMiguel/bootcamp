@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule, DatePipe } from '@angular/common';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { CapitalizeAllWordsPipe, } from '../../lib/my-core';
 
 @Component({
   selector: 'app-films',
@@ -31,7 +32,7 @@ export class FilmsComponent implements OnInit, OnDestroy {
   templateUrl: './tmpl-list.component.html',
   styleUrls: ['./component.component.css'],
   standalone: true,
-  imports: [ CommonModule, ],
+  imports: [ CommonModule, CapitalizeAllWordsPipe ],
 })
 export class FilmsListComponent implements OnInit, OnDestroy {
   constructor(protected vm: FilmsViewModelService) { }

@@ -70,25 +70,25 @@ export class ErrorMessagePipe implements PipeTransform {
     for (const err in value) {
       switch (err) {
         case 'required':
-          msg += 'Es obligatorio. ';
+          msg += 'It is mandatory. ';
           break;
         case 'minlength':
-          msg += `Como mínimo debe tener ${value[err].requiredLength} caracteres. `;
+          msg += `The minimum length must be at least ${value[err].requiredLength} characters. `;
           break;
         case 'maxlength':
-          msg += `Como máximo debe tener ${value[err].requiredLength} caracteres. `;
+          msg += `The maximum length must not exceed ${value[err].requiredLength} characters. `;
           break;
         case 'pattern':
-          msg += (patternMsg ? patternMsg : 'El formato no es correcto') + '. ';
+          msg += (patternMsg ? patternMsg : 'Incorrect format') + '. ';
           break;
         case 'email':
-          msg += 'El formato del correo electrónico no es correcto. ';
+          msg += 'The format of the e-mail is not correct. ';
           break;
         case 'min':
-          msg += `El valor debe ser mayor o igual a ${value[err].min}. `;
+          msg += `The value must be greater than or equal to ${value[err].min}. `;
           break;
         case 'max':
-          msg += `El valor debe ser inferior o igual a ${value[err].max}. `;
+          msg += `The value must be less than or equal to ${value[err].max}. `;
           break;
         default:
           if (typeof value[err] === 'string')

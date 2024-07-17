@@ -14,6 +14,15 @@ export class FilmsViewModelService {
   protected element: any = {};
   protected originalId: any = null;
 
+  public languages = [
+    { id: 1, name: 'English' },
+    { id: 2, name: 'Italian' },
+    { id: 3, name: 'Japanese' },
+    { id: 4, name: 'Mandarin' },
+    { id: 5, name: 'French' },
+    { id: 6, name: 'German' },
+  ];
+
   constructor(protected dao: FilmsDAOService) { }
 
   public get Mode(): ModoCRUD { return this.mode; }

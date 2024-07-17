@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule, DatePipe } from '@angular/common';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { CapitalizeAllWordsPipe, } from '../../lib/my-core';
+import { CapitalizeAllWordsPipe, ErrorMessagePipe, } from '../../lib/my-core';
 
 @Component({
   selector: 'app-films',
@@ -48,7 +48,7 @@ export class FilmsListComponent implements OnInit, OnDestroy {
   templateUrl: './tmpl-form.component.html',
   styleUrls: ['./component.component.css'],
   standalone: true,
-  imports: [FormsModule, ],
+  imports: [ FormsModule, ErrorMessagePipe, CommonModule, ],
 })
 export class FilmsAddComponent implements OnInit {
   constructor(protected vm: FilmsViewModelService) {}
@@ -65,7 +65,7 @@ export class FilmsAddComponent implements OnInit {
   templateUrl: './tmpl-form.component.html',
   styleUrls: ['./component.component.css'],
   standalone: true,
-  imports: [FormsModule, ],
+  imports: [ FormsModule, ErrorMessagePipe, CommonModule, ],
 })
 export class FilmsEditComponent implements OnInit, OnDestroy {
   private obs$?: Subscription;
@@ -96,7 +96,7 @@ export class FilmsEditComponent implements OnInit, OnDestroy {
   templateUrl: './tmpl-view.component.html',
   styleUrls: ['./component.component.css'],
   standalone: true,
-  imports: [DatePipe],
+  imports: [DatePipe, CommonModule,],
 })
 export class FilmsViewComponent implements OnChanges {
   @Input() id?: string;
